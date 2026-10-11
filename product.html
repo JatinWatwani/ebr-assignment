@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMORA! | Glow Bulb</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800;900&family=Titan+One&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { candy: ['"Titan One"', 'cursive'], sans: ['Fredoka', 'sans-serif'], },
+          colors: { candy: { pink: '#FF4DB8', blue: '#00D4FF', yellow: '#FFDF00', green: '#00FF66', purple: '#B533FF', bg: '#FFF5F8', black: '#1A1A1A', }, },
+          boxShadow: { 'brutal': '8px 8px 0px 0px rgba(26,26,26,1)', 'brutal-sm': '4px 4px 0px 0px rgba(26,26,26,1)', },
+          animation: { 'wobble': 'wobble 4s ease-in-out infinite', },
+          keyframes: { wobble: { '0%, 100%': { transform: 'rotate(-3deg)' }, '50%': { transform: 'rotate(3deg)' }, } },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { background-color: #FFF5F8; color: #1A1A1A; background-image: radial-gradient(#FF4DB8 1px, transparent 1px); background-size: 40px 40px; }
+    .text-stroke { -webkit-text-stroke: 3px #1A1A1A; color: #FFF; }
+    .btn-brutal { transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .btn-brutal:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px 0px rgba(26,26,26,1); }
+    .btn-brutal:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px rgba(26,26,26,1); }
+    ::-webkit-scrollbar { width: 16px; }
+    ::-webkit-scrollbar-track { background: #FFF5F8; border-left: 4px solid #1A1A1A; }
+    ::-webkit-scrollbar-thumb { background: #FF4DB8; border-left: 4px solid #1A1A1A; border-bottom: 4px solid #1A1A1A; }
+  </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-candy-yellow selection:text-candy-black">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 w-full z-50 bg-candy-blue border-b-8 border-candy-black shadow-brutal-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="index.html" class="flex items-center gap-2 transform hover:scale-105 transition-transform">
+        <div class="w-10 h-10 bg-candy-yellow border-4 border-candy-black rounded-full flex items-center justify-center animate-wobble">
+          <span class="text-xl">✨</span>
+        </div>
+        <span class="font-candy text-3xl tracking-wide text-white text-stroke drop-shadow-md">LUMORA!</span>
+      </a>
+      <nav class="hidden md:flex gap-8 font-black text-xl tracking-wide">
+        <a href="shop.html" class="hover:text-candy-yellow hover:underline decoration-4 underline-offset-4 transition-colors">SYSTEMS</a>
+        <a href="index.html#use-cases" class="hover:text-candy-pink hover:underline decoration-4 underline-offset-4 transition-colors">ROUTINES</a>
+        <a href="index.html#lifestyle" class="hover:text-candy-green hover:underline decoration-4 underline-offset-4 transition-colors">LIFESTYLE</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="cart.html" class="relative w-12 h-12 bg-white border-4 border-candy-black rounded-full shadow-brutal-sm hover:translate-x-1 hover:-translate-y-1 hover:shadow-brutal transition-all flex items-center justify-center text-xl cursor-pointer">
+          🛒
+          <span class="absolute -top-2 -right-2 w-6 h-6 bg-candy-pink text-white border-2 border-candy-black rounded-full text-xs font-black flex items-center justify-center">2</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRODUCT PAGE -->
+  <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+    
+    <!-- Breadcrumbs -->
+    <div class="bg-white border-4 border-candy-black px-4 py-2 rounded-full inline-block font-black text-sm mb-8 shadow-brutal-sm">
+      <a href="index.html" class="hover:text-candy-pink underline decoration-2">HOME</a> > 
+      <a href="shop.html" class="hover:text-candy-pink underline decoration-2">SYSTEMS</a> > 
+      SMART LIGHTS
+    </div>
+    
+    <div class="flex flex-col lg:flex-row gap-12 items-start">
+      
+      <!-- Product Image Gallery -->
+      <div class="w-full lg:w-1/2 sticky top-36">
+        <div class="bg-white border-8 border-candy-black rounded-[3rem] p-6 shadow-brutal transform -rotate-1 relative group">
+          <div class="absolute top-6 right-6 bg-candy-yellow text-candy-black font-black text-lg px-4 py-2 border-4 border-candy-black rounded-full rotate-6 shadow-brutal-sm z-10">
+            BEST SELLER!
+          </div>
+
+          <!-- Active View Badge -->
+          <div id="view-badge" class="absolute top-6 left-6 bg-candy-blue text-white font-black text-sm px-3 py-1.5 border-4 border-candy-black rounded-full -rotate-3 shadow-brutal-sm z-10 transition-all">
+            FRONT VIEW ⚡
+          </div>
+          
+          <!-- Main Hero Display -->
+          <div class="aspect-square bg-candy-pink/15 rounded-3xl border-4 border-candy-black overflow-hidden relative flex items-center justify-center p-8 transition-colors duration-300" id="main-view-container">
+            <img id="main-product-img" src="images/product_bulb_1.png" alt="Lumora Glow Bulb" class="w-full h-full object-contain filter drop-shadow-2xl transition-all duration-300 transform group-hover:scale-105" />
+          </div>
+          
+          <!-- Thumbnails (Multiple Marketplace Views) -->
+          <div class="grid grid-cols-4 gap-3 mt-5">
+            <!-- View 1 -->
+            <button type="button" onclick="switchView(0)" class="thumb-btn active-thumb w-full aspect-square rounded-2xl border-4 border-candy-black p-2 cursor-pointer bg-candy-pink/20 hover:scale-105 transition-all shadow-brutal-sm ring-4 ring-candy-pink">
+              <img src="images/product_bulb_1.png" alt="Front View" class="w-full h-full object-contain" />
+              <span class="block text-[10px] font-black uppercase text-center mt-0.5 truncate">Front</span>
+            </button>
+            <!-- View 2 -->
+            <button type="button" onclick="switchView(1)" class="thumb-btn w-full aspect-square rounded-2xl border-4 border-candy-black p-2 cursor-pointer bg-candy-blue/15 hover:scale-105 transition-all shadow-brutal-sm opacity-70 hover:opacity-100">
+              <img src="images/product_bulb_2.png" alt="45° Angle" class="w-full h-full object-contain" />
+              <span class="block text-[10px] font-black uppercase text-center mt-0.5 truncate">45° Angle</span>
+            </button>
+            <!-- View 3 -->
+            <button type="button" onclick="switchView(2)" class="thumb-btn w-full aspect-square rounded-2xl border-4 border-candy-black p-2 cursor-pointer bg-candy-yellow/20 hover:scale-105 transition-all shadow-brutal-sm opacity-70 hover:opacity-100">
+              <img src="images/product_bulb_3.png" alt="Amber Mode" class="w-full h-full object-contain" />
+              <span class="block text-[10px] font-black uppercase text-center mt-0.5 truncate">Amber Glow</span>
+            </button>
+            <!-- View 4 -->
+            <button type="button" onclick="switchView(3)" class="thumb-btn w-full aspect-square rounded-2xl border-4 border-candy-black p-2 cursor-pointer bg-candy-purple/15 hover:scale-105 transition-all shadow-brutal-sm opacity-70 hover:opacity-100">
+              <img src="images/product_bulb_4.png" alt="Cyan Mode" class="w-full h-full object-contain" />
+              <span class="block text-[10px] font-black uppercase text-center mt-0.5 truncate">Cyan Glow</span>
+            </button>
+          </div>
+
+          <!-- Marketplace Features Bar -->
+          <div class="mt-4 pt-4 border-t-4 border-candy-black/10 flex justify-between items-center text-xs font-black text-gray-600">
+            <span class="flex items-center gap-1.5"><span>✨</span> Isolated Studio Asset</span>
+            <span class="flex items-center gap-1.5"><span>🔍</span> Multi-Angle Views</span>
+            <span class="flex items-center gap-1.5"><span>📦</span> Ready to Ship</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="w-full lg:w-1/2">
+        <h1 class="font-candy text-5xl md:text-7xl text-white text-stroke drop-shadow-md mb-4 leading-tight">LUMORA<br>GLOW BULB</h1>
+        
+        <div class="flex items-center gap-4 mb-6">
+          <div class="flex text-candy-yellow text-2xl drop-shadow-md">⭐⭐⭐⭐⭐</div>
+          <span class="font-bold text-lg underline decoration-4 decoration-candy-blue">4,203 Reviews</span>
+        </div>
+
+        <div class="bg-white border-6 border-candy-black rounded-2xl p-6 shadow-brutal-sm mb-8 transform rotate-1">
+          <div class="font-candy text-5xl text-candy-pink text-stroke mb-2">₹2,499</div>
+          <p class="font-black text-green-500 text-lg">✓ IN STOCK & READY TO SHIP!</p>
+        </div>
+
+        <p class="font-bold text-2xl mb-8 leading-snug">
+          Throw out those boring old bulbs. The Glow Bulb brings 16 million colors of pure, unadulterated vibes right to your room. Syncs with your music, your movies, and your mood.
+        </p>
+
+        <ul class="space-y-4 font-black text-xl mb-12">
+          <li class="flex items-center gap-4">
+            <div class="w-8 h-8 bg-candy-blue rounded-full border-4 border-candy-black flex items-center justify-center flex-shrink-0">🎨</div>
+            16 Million Vibrant Colors
+          </li>
+          <li class="flex items-center gap-4">
+            <div class="w-8 h-8 bg-candy-green rounded-full border-4 border-candy-black flex items-center justify-center flex-shrink-0">📱</div>
+            App & Voice Controlled
+          </li>
+          <li class="flex items-center gap-4">
+            <div class="w-8 h-8 bg-candy-yellow rounded-full border-4 border-candy-black flex items-center justify-center flex-shrink-0">⚡</div>
+            No Hub Required (Wi-Fi Direct)
+          </li>
+        </ul>
+
+        <!-- Add to Cart Actions -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+          <div class="flex items-center bg-white border-6 border-candy-black rounded-full p-2 w-32 shadow-brutal-sm">
+            <button class="w-10 h-10 font-black text-2xl bg-gray-200 rounded-full hover:bg-candy-pink hover:text-white transition-colors">-</button>
+            <span class="flex-1 text-center font-black text-2xl">1</span>
+            <button class="w-10 h-10 font-black text-2xl bg-gray-200 rounded-full hover:bg-candy-blue hover:text-white transition-colors">+</button>
+          </div>
+          
+          <a href="cart.html" class="flex-1 btn-brutal bg-candy-yellow text-candy-black font-black text-2xl px-8 py-4 border-6 border-candy-black rounded-full shadow-brutal tracking-wide text-center">
+            ADD TO CART 🛒
+          </a>
+        </div>
+
+        <a href="cart.html?checkout=1" class="block w-full btn-brutal bg-candy-pink text-white font-black text-2xl px-8 py-4 border-6 border-candy-black rounded-full shadow-brutal tracking-wide text-center">
+          BUY IT NOW 🚀
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-candy-blue border-t-8 border-candy-black pt-10 pb-10 px-6 mt-20">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 font-black text-lg mb-16">
+        
+        <div class="col-span-1 md:col-span-2">
+          <h4 class="font-candy text-5xl text-white text-stroke mb-4">LUMORA!</h4>
+          <p class="text-xl mb-6">Making homes smarter, one intelligent device at a time. The future is connected.</p>
+          <div class="bg-white border-4 border-candy-black shadow-brutal-sm p-4 rounded-xl transform -rotate-1 inline-block">
+            <h5 class="text-2xl bg-candy-pink text-white inline-block px-3 py-1 mb-2 transform -skew-x-6">DEVELOPED BY</h5>
+            <ul class="text-lg space-y-1">
+              <li><strong>Name:</strong> Jatin Watwani</li>
+              <li><strong>Roll No:</strong> 27069</li>
+              <li><strong>Branch:</strong> SY BTech AIML</li>
+              <li><strong>College:</strong> Modern College of Engineering, Pune</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">SHOP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Smart Lights</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Cameras & Locks</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Climate Control</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Hubs & Audio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">HELP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="#" onclick="showPopup(event, 'Help Center')" class="hover:text-white transition-colors hover:underline decoration-4">Help Center</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Setup Guides')" class="hover:text-white transition-colors hover:underline decoration-4">Setup Guides</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Contact Us')" class="hover:text-white transition-colors hover:underline decoration-4">Contact Us</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Returns & Warranty')" class="hover:text-white transition-colors hover:underline decoration-4">Returns & Warranty</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t-4 border-candy-black pt-8 flex flex-col md:flex-row justify-between items-center gap-6 font-black text-sm uppercase">
+        <p>© 2026 LUMORA INC. POWERED BY TECH.</p>
+        <div class="flex gap-6">
+          <a href="#" onclick="showPopup(event, 'Privacy Policy')" class="hover:text-white">PRIVACY</a>
+          <a href="#" onclick="showPopup(event, 'Terms of Service')" class="hover:text-white">TERMS</a>
+          <a href="#" onclick="showPopup(event, 'Cookies')" class="hover:text-white">COOKIES</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- INFO POPUP MODAL -->
+  <div id="info-popup" class="hidden fixed inset-0 z-[100] items-center justify-center bg-candy-black/80 backdrop-blur-sm p-4">
+    <div class="bg-white border-8 border-candy-black shadow-brutal p-8 md:p-12 rounded-[2rem] max-w-2xl w-full relative transform -rotate-1">
+      <button onclick="closePopup()" class="absolute -top-4 -right-4 w-12 h-12 bg-candy-pink text-white border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center font-black text-2xl hover:bg-candy-yellow hover:text-candy-black transition-colors z-10">X</button>
+      <h2 id="popup-title" class="font-candy text-3xl md:text-5xl text-candy-blue text-stroke drop-shadow-md mb-6 uppercase">Title</h2>
+      <p id="popup-body" class="font-bold text-lg md:text-xl leading-relaxed text-candy-black whitespace-pre-wrap">Body content goes here.</p>
+    </div>
+  </div>
+
+  <script>
+    const popupContent = {
+      'Help Center': 'Welcome to the Lumora Help Center. Our dedicated support team is committed to ensuring you have a seamless experience with our smart lighting products.\n\nIf you encounter any connectivity or hardware issues, please consult our troubleshooting guides or reach out to our technical support staff for prompt, professional assistance.',
+      'Setup Guides': 'Our smart devices are designed for intuitive installation.\n\n1. Download the Lumora mobile application.\n2. Connect the device to a standard power outlet.\n3. Follow the on-screen instructions to pair the device with your local Wi-Fi network.\n\nFor detailed configuration options and advanced integrations, please refer to the comprehensive user manual provided in the packaging.',
+      'Contact Us': 'We value your feedback and inquiries. You can reach our customer service representatives via email at support@lumora.com or by calling our toll-free number.\n\nOur official business hours are Monday through Friday, 9:00 AM to 5:00 PM EST. We strive to respond to all communications within one business day.',
+      'Returns & Warranty': 'Lumora offers a comprehensive 1-year limited warranty on all hardware components, covering manufacturing defects and malfunctions under normal use conditions.\n\nIf you are not completely satisfied with your purchase, products may be returned in their original packaging within 30 days of receipt for a full refund.',
+      'Privacy Policy': 'Lumora respects your privacy and is committed to protecting your personal data. We only collect essential information required to operate and improve your smart home experience.\n\nWe do not sell, distribute, or lease your personal information to third parties unless we have your explicit permission or are required by law to do so.',
+      'Terms of Service': 'By accessing and using Lumora products and services, you agree to comply with our terms and conditions.\n\nThese terms govern the usage of our proprietary software and hardware. Any unauthorized modification or reverse engineering of Lumora devices is strictly prohibited and will void all applicable warranties.',
+      'Cookies': 'Our website utilizes cookies and similar tracking technologies to enhance user experience, analyze site traffic, and optimize performance.\n\nBy continuing to navigate our website, you consent to our use of cookies in accordance with our standard data policy. You may manage your cookie preferences through your browser settings.'
+    };
+
+    function showPopup(event, key) {
+      event.preventDefault();
+      document.getElementById('popup-title').innerText = key;
+      document.getElementById('popup-body').innerText = popupContent[key];
+      const popup = document.getElementById('info-popup');
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+    }
+
+    function closePopup() {
+      const popup = document.getElementById('info-popup');
+      popup.classList.add('hidden');
+      popup.classList.remove('flex');
+    }
+
+    // Multi-View Gallery Logic
+    const views = [
+      { src: 'images/product_bulb_1.png', label: 'FRONT VIEW ⚡', bg: 'bg-candy-pink/15', ring: 'ring-candy-pink' },
+      { src: 'images/product_bulb_2.png', label: '45° ANGLE VIEW 📐', bg: 'bg-candy-blue/15', ring: 'ring-candy-blue' },
+      { src: 'images/product_bulb_3.png', label: 'AMBER GLOW MODE 🕯️', bg: 'bg-candy-yellow/20', ring: 'ring-candy-yellow' },
+      { src: 'images/product_bulb_4.png', label: 'CYAN GLOW MODE 🌊', bg: 'bg-candy-purple/15', ring: 'ring-candy-purple' }
+    ];
+
+    function switchView(index) {
+      const mainImg = document.getElementById('main-product-img');
+      const badge = document.getElementById('view-badge');
+      const container = document.getElementById('main-view-container');
+      const thumbBtns = document.querySelectorAll('.thumb-btn');
+
+      if (!views[index]) return;
+      const v = views[index];
+
+      // Fade out
+      mainImg.style.opacity = '0';
+      mainImg.style.transform = 'scale(0.95)';
+
+      setTimeout(() => {
+        mainImg.src = v.src;
+        badge.innerText = v.label;
+
+        // Reset container backgrounds
+        container.className = `aspect-square ${v.bg} rounded-3xl border-4 border-candy-black overflow-hidden relative flex items-center justify-center p-8 transition-colors duration-300`;
+
+        // Update active thumbnail styles
+        thumbBtns.forEach((btn, i) => {
+          if (i === index) {
+            btn.classList.add('active-thumb', 'ring-4', v.ring);
+            btn.classList.remove('opacity-70');
+          } else {
+            btn.classList.remove('active-thumb', 'ring-4', 'ring-candy-pink', 'ring-candy-blue', 'ring-candy-yellow', 'ring-candy-purple');
+            btn.classList.add('opacity-70');
+          }
+        });
+
+        // Fade in
+        mainImg.style.opacity = '1';
+        mainImg.style.transform = 'scale(1)';
+      }, 150);
+    }
+  </script>
+
+</body>
+</html>

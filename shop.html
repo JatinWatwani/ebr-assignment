@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMORA! | The Shop</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800;900&family=Titan+One&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { candy: ['"Titan One"', 'cursive'], sans: ['Fredoka', 'sans-serif'], },
+          colors: {
+            candy: { pink: '#FF4DB8', blue: '#00D4FF', yellow: '#FFDF00', green: '#00FF66', purple: '#B533FF', bg: '#FFF5F8', black: '#1A1A1A', },
+          },
+          boxShadow: {
+            'brutal': '8px 8px 0px 0px rgba(26,26,26,1)',
+            'brutal-sm': '4px 4px 0px 0px rgba(26,26,26,1)',
+          },
+          animation: { 'wobble': 'wobble 4s ease-in-out infinite', },
+          keyframes: { wobble: { '0%, 100%': { transform: 'rotate(-3deg)' }, '50%': { transform: 'rotate(3deg)' }, } },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { background-color: #FFF5F8; color: #1A1A1A; background-image: radial-gradient(#FF4DB8 1px, transparent 1px); background-size: 40px 40px; }
+    .text-stroke { -webkit-text-stroke: 3px #1A1A1A; color: #FFF; }
+    .btn-brutal { transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+    .btn-brutal:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px 0px rgba(26,26,26,1); }
+    ::-webkit-scrollbar { width: 16px; }
+    ::-webkit-scrollbar-track { background: #FFF5F8; border-left: 4px solid #1A1A1A; }
+    ::-webkit-scrollbar-thumb { background: #FF4DB8; border-left: 4px solid #1A1A1A; border-bottom: 4px solid #1A1A1A; }
+    .hidden-product { display: none !important; }
+  </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-candy-yellow selection:text-candy-black">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 w-full z-50 bg-candy-blue border-b-8 border-candy-black shadow-brutal-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="index.html" class="flex items-center gap-2 transform hover:scale-105 transition-transform">
+        <div class="w-10 h-10 bg-candy-yellow border-4 border-candy-black rounded-full flex items-center justify-center animate-wobble">
+          <span class="text-xl">✨</span>
+        </div>
+        <span class="font-candy text-3xl tracking-wide text-white text-stroke drop-shadow-md">LUMORA!</span>
+      </a>
+      <nav class="hidden md:flex gap-8 font-black text-xl tracking-wide">
+        <a href="shop.html" class="text-candy-yellow underline decoration-4 underline-offset-4">SYSTEMS</a>
+        <a href="index.html#use-cases" class="hover:text-candy-pink hover:underline decoration-4 underline-offset-4 transition-colors">ROUTINES</a>
+        <a href="index.html#lifestyle" class="hover:text-candy-green hover:underline decoration-4 underline-offset-4 transition-colors">LIFESTYLE</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="cart.html" class="relative w-12 h-12 bg-white border-4 border-candy-black rounded-full shadow-brutal-sm hover:translate-x-1 hover:-translate-y-1 hover:shadow-brutal transition-all flex items-center justify-center text-xl cursor-pointer">
+          🛒
+          <span id="cart-count" class="absolute -top-2 -right-2 w-6 h-6 bg-candy-pink text-white border-2 border-candy-black rounded-full text-xs font-black flex items-center justify-center">2</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- STOREFRONT -->
+  <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+    
+    <!-- Sidebar Filters -->
+    <aside class="w-full lg:w-1/4">
+      <div class="bg-candy-yellow border-6 border-candy-black rounded-[2rem] p-6 shadow-brutal transform -rotate-1 sticky top-36">
+        <h3 class="font-candy text-4xl text-white text-stroke mb-6">FILTER!</h3>
+        
+        <div class="mb-6">
+          <h4 class="font-black text-xl mb-3 bg-white inline-block px-3 py-1 border-4 border-candy-black rounded-lg">SYSTEMS</h4>
+          <ul class="space-y-3 font-bold text-lg" id="category-filters">
+            <li class="flex items-center gap-3"><input type="checkbox" value="all" checked class="w-6 h-6 accent-candy-pink border-2 border-candy-black rounded"> All Systems</li>
+            <li class="flex items-center gap-3"><input type="checkbox" value="lights" class="w-6 h-6 accent-candy-pink border-2 border-candy-black rounded"> Smart Lights</li>
+            <li class="flex items-center gap-3"><input type="checkbox" value="security" class="w-6 h-6 accent-candy-pink border-2 border-candy-black rounded"> Security Cameras</li>
+            <li class="flex items-center gap-3"><input type="checkbox" value="hubs" class="w-6 h-6 accent-candy-pink border-2 border-candy-black rounded"> Hubs & Audio</li>
+            <li class="flex items-center gap-3"><input type="checkbox" value="climate" class="w-6 h-6 accent-candy-pink border-2 border-candy-black rounded"> Climate Control</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-black text-xl mb-3 bg-white inline-block px-3 py-1 border-4 border-candy-black rounded-lg">INVESTMENT</h4>
+          <ul class="space-y-3 font-bold text-lg" id="price-filters">
+            <li class="flex items-center gap-3"><input type="radio" name="price" value="all" checked class="w-6 h-6 accent-candy-blue"> Any Price</li>
+            <li class="flex items-center gap-3"><input type="radio" name="price" value="under50" class="w-6 h-6 accent-candy-blue"> Under ₹4,000 (Starter)</li>
+            <li class="flex items-center gap-3"><input type="radio" name="price" value="50to150" class="w-6 h-6 accent-candy-blue"> ₹4,000 - ₹12,000 (Mid-Tier)</li>
+            <li class="flex items-center gap-3"><input type="radio" name="price" value="over150" class="w-6 h-6 accent-candy-blue"> ₹12,000+ (Pro)</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Product Grid -->
+    <main class="w-full lg:w-3/4">
+      
+      <!-- Optimized Sort Header -->
+      <div class="flex flex-col sm:flex-row justify-between items-center bg-white border-6 border-candy-black rounded-2xl px-6 py-4 mb-8 shadow-brutal-sm gap-4">
+        <h2 class="font-black text-2xl tracking-wide"><span id="product-count">6</span> SMART DEVICES FOUND</h2>
+        <div class="flex items-center gap-3">
+          <label class="font-bold text-gray-500 uppercase tracking-widest text-sm">Sort by:</label>
+          <div class="relative">
+            <select class="appearance-none font-black border-4 border-candy-black rounded-full px-6 py-2 pr-10 bg-candy-yellow focus:outline-none focus:ring-4 focus:ring-candy-pink cursor-pointer transition-shadow hover:shadow-brutal-sm">
+              <option>Most Popular</option>
+              <option>Newest Drops</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Customer Rating</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-candy-black">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8" id="product-grid">
+        
+        <!-- Product 1 -->
+        <a href="product.html" data-category="lights" data-price="29.99" class="product-card group block bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:rotate-1">
+          <div class="aspect-square bg-candy-pink/15 rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_bulb_1.png" alt="Lumora Glow Bulb" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute top-2 right-2 bg-candy-yellow text-candy-black font-black text-sm px-3 py-1 border-4 border-candy-black rounded-full rotate-6 shadow-brutal-sm">
+              BEST SELLER!
+            </div>
+            <div class="absolute bottom-2 left-2 bg-white/90 text-candy-black font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              4 VIEWS 🔍
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1">Lumora Glow Bulb</h3>
+          <p class="font-bold text-gray-500 mb-3">Color Changing Smart Light</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl">
+            ⭐⭐⭐⭐⭐ <span class="text-sm text-candy-black ml-2">(4,203)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="font-candy text-3xl text-candy-pink text-stroke">₹2,499</span>
+            <button type="button" class="add-to-cart-btn bg-candy-blue w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              🛒
+            </button>
+          </div>
+        </a>
+
+        <!-- Product 2 -->
+        <a href="product.html" data-category="hubs" data-price="49.99" class="product-card group block bg-candy-purple text-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:-rotate-1">
+          <div class="aspect-square bg-white/90 rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_hub_mini.png" alt="Brain Box Mini" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-2 left-2 bg-candy-purple text-white font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              STUDIO 360°
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1 text-white">Brain Box Mini</h3>
+          <p class="font-bold text-white/80 mb-3">Smart Speaker Hub</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl">
+            ⭐⭐⭐⭐<span class="opacity-50">⭐</span> <span class="text-sm text-white ml-2">(892)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="font-candy text-3xl text-white text-stroke">₹3,999</span>
+            <button type="button" class="add-to-cart-btn bg-candy-yellow text-black w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              🛒
+            </button>
+          </div>
+        </a>
+
+        <!-- Product 3 -->
+        <a href="product.html" data-category="security" data-price="79.99" class="product-card group block bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:rotate-1">
+          <div class="aspect-square bg-candy-green/15 rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_camera.png" alt="WatchDog Cam" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute top-2 right-2 bg-candy-pink text-white font-black text-sm px-3 py-1 border-4 border-candy-black rounded-full -rotate-6 shadow-brutal-sm">
+              NEW DROP!
+            </div>
+            <div class="absolute bottom-2 left-2 bg-white/90 text-candy-black font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              STUDIO SHOT
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1">WatchDog Cam</h3>
+          <p class="font-bold text-gray-500 mb-3">Indoor Security Camera</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl">
+            ⭐⭐⭐⭐⭐ <span class="text-sm text-candy-black ml-2">(1,402)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="font-candy text-3xl text-candy-green text-stroke">₹6,499</span>
+            <button type="button" class="add-to-cart-btn bg-candy-pink w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              🛒
+            </button>
+          </div>
+        </a>
+
+        <!-- Product 4 -->
+        <a href="product.html" data-category="climate" data-price="129.99" class="product-card group block bg-candy-blue border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:-rotate-2">
+          <div class="aspect-square bg-white rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_thermo.png" alt="Chill Pill Thermo" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-2 left-2 bg-candy-blue text-white font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              OLED UI
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1 text-white text-stroke">Chill Pill Thermo</h3>
+          <p class="font-bold text-candy-black mb-3">Smart Thermostat</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl drop-shadow-sm">
+            ⭐⭐⭐⭐⭐ <span class="text-sm text-candy-black ml-2">(3,104)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="font-candy text-3xl text-white text-stroke">₹10,499</span>
+            <button type="button" class="add-to-cart-btn bg-candy-green w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              🛒
+            </button>
+          </div>
+        </a>
+
+        <!-- Product 5 -->
+        <a href="product.html" data-category="security" data-price="149.99" class="product-card group block bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:rotate-1">
+          <div class="aspect-square bg-candy-yellow/20 rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_doorbell.png" alt="DingDong Pro" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute top-2 right-2 bg-candy-blue text-white font-black text-sm px-3 py-1 border-4 border-candy-black rounded-full rotate-3 shadow-brutal-sm">
+              BUNDLE DEAL!
+            </div>
+            <div class="absolute bottom-2 left-2 bg-white/90 text-candy-black font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              HD VIDEO
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1">DingDong Pro</h3>
+          <p class="font-bold text-gray-500 mb-3">Video Doorbell System</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl">
+            ⭐⭐⭐⭐<span class="opacity-50">⭐</span> <span class="text-sm text-candy-black ml-2">(512)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <div class="flex flex-col">
+              <span class="font-black text-gray-400 line-through text-sm">₹15,999</span>
+              <span class="font-candy text-3xl text-candy-blue text-stroke">₹11,999</span>
+            </div>
+            <button type="button" class="add-to-cart-btn bg-candy-pink w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform text-white">
+              🛒
+            </button>
+          </div>
+        </a>
+
+        <!-- Product 6 -->
+        <a href="product.html" data-category="lights" data-price="19.99" class="product-card group block bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:-rotate-1">
+          <div class="aspect-square bg-candy-purple/15 rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_led_strip.png" alt="LED Strip Kit" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-2 left-2 bg-white/90 text-candy-black font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              RGBIC SYNC
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1">LED Strip Kit</h3>
+          <p class="font-bold text-gray-500 mb-3">5M RGB Decor Lights</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl">
+            ⭐⭐⭐⭐⭐ <span class="text-sm text-candy-black ml-2">(12,400)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="font-candy text-3xl text-candy-purple text-stroke">₹1,599</span>
+            <button type="button" class="add-to-cart-btn bg-candy-yellow w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              🛒
+            </button>
+          </div>
+        </a>
+        
+        <!-- Hidden Loaded Products for Load More functionality -->
+        <a href="product.html" data-category="hubs" data-price="89.99" class="product-card hidden-product group block bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:rotate-2">
+          <div class="aspect-square bg-candy-blue/15 rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_hub_pro.png" alt="Brain Box Pro" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-2 left-2 bg-white/90 text-candy-black font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              TOUCH DISPLAY
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1">Brain Box Pro</h3>
+          <p class="font-bold text-gray-500 mb-3">Advanced Smart Hub</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl">
+            ⭐⭐⭐⭐⭐ <span class="text-sm text-candy-black ml-2">(340)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="font-candy text-3xl text-candy-blue text-stroke">₹7,199</span>
+            <button type="button" class="add-to-cart-btn bg-candy-pink w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              🛒
+            </button>
+          </div>
+        </a>
+        <a href="product.html" data-category="climate" data-price="29.99" class="product-card hidden-product group block bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal transform transition-transform hover:-translate-y-2 hover:-rotate-1">
+          <div class="aspect-square bg-candy-green/15 rounded-2xl border-4 border-candy-black overflow-hidden relative mb-4 flex items-center justify-center p-4">
+            <img src="images/product_plug_mini.png" alt="Smart Plug Mini" class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-2 left-2 bg-white/90 text-candy-black font-black text-[11px] px-2 py-0.5 border-2 border-candy-black rounded-full shadow-sm">
+              WI-FI OUTLET
+            </div>
+          </div>
+          <h3 class="font-black text-2xl mb-1">Smart Plug Mini</h3>
+          <p class="font-bold text-gray-500 mb-3">App & Voice Automation</p>
+          <div class="flex items-center gap-1 mb-4 text-candy-yellow text-xl">
+            ⭐⭐⭐⭐<span class="opacity-50">⭐</span> <span class="text-sm text-candy-black ml-2">(156)</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="font-candy text-3xl text-candy-green text-stroke">₹1,199</span>
+            <button type="button" class="add-to-cart-btn bg-candy-blue w-12 h-12 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              🛒
+            </button>
+          </div>
+        </a>
+      </div>
+      
+      <div class="mt-16 flex justify-center">
+        <button id="load-more-btn" class="btn-brutal bg-white font-black text-2xl px-12 py-5 border-6 border-candy-black rounded-full shadow-brutal hover:bg-candy-bg text-candy-black tracking-wide">
+          LOAD MORE DEVICES... 🔄
+        </button>
+      </div>
+    </main>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-candy-blue border-t-8 border-candy-black pt-10 pb-10 px-6 mt-20">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 font-black text-lg mb-16">
+        
+        <div class="col-span-1 md:col-span-2">
+          <h4 class="font-candy text-5xl text-white text-stroke mb-4">LUMORA!</h4>
+          <p class="text-xl mb-6">Making homes smarter, one intelligent device at a time. The future is connected.</p>
+          <div class="bg-white border-4 border-candy-black shadow-brutal-sm p-4 rounded-xl transform -rotate-1 inline-block">
+            <h5 class="text-2xl bg-candy-pink text-white inline-block px-3 py-1 mb-2 transform -skew-x-6">DEVELOPED BY</h5>
+            <ul class="text-lg space-y-1">
+              <li><strong>Name:</strong> Jatin Watwani</li>
+              <li><strong>Roll No:</strong> 27069</li>
+              <li><strong>Branch:</strong> SY BTech AIML</li>
+              <li><strong>College:</strong> Modern College of Engineering, Pune</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">SHOP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Smart Lights</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Cameras & Locks</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Climate Control</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Hubs & Audio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">HELP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="#" onclick="showPopup(event, 'Help Center')" class="hover:text-white transition-colors hover:underline decoration-4">Help Center</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Setup Guides')" class="hover:text-white transition-colors hover:underline decoration-4">Setup Guides</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Contact Us')" class="hover:text-white transition-colors hover:underline decoration-4">Contact Us</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Returns & Warranty')" class="hover:text-white transition-colors hover:underline decoration-4">Returns & Warranty</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t-4 border-candy-black pt-8 flex flex-col md:flex-row justify-between items-center gap-6 font-black text-sm uppercase">
+        <p>© 2026 LUMORA INC. POWERED BY TECH.</p>
+        <div class="flex gap-6">
+          <a href="#" onclick="showPopup(event, 'Privacy Policy')" class="hover:text-white">PRIVACY</a>
+          <a href="#" onclick="showPopup(event, 'Terms of Service')" class="hover:text-white">TERMS</a>
+          <a href="#" onclick="showPopup(event, 'Cookies')" class="hover:text-white">COOKIES</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- INFO POPUP MODAL -->
+  <div id="info-popup" class="hidden fixed inset-0 z-[100] items-center justify-center bg-candy-black/80 backdrop-blur-sm p-4">
+    <div class="bg-white border-8 border-candy-black shadow-brutal p-8 md:p-12 rounded-[2rem] max-w-2xl w-full relative transform -rotate-1">
+      <button onclick="closePopup()" class="absolute -top-4 -right-4 w-12 h-12 bg-candy-pink text-white border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center font-black text-2xl hover:bg-candy-yellow hover:text-candy-black transition-colors z-10">X</button>
+      <h2 id="popup-title" class="font-candy text-3xl md:text-5xl text-candy-blue text-stroke drop-shadow-md mb-6 uppercase">Title</h2>
+      <p id="popup-body" class="font-bold text-lg md:text-xl leading-relaxed text-candy-black whitespace-pre-wrap">Body content goes here.</p>
+    </div>
+  </div>
+
+  <script>
+    const popupContent = {
+      'Help Center': 'Welcome to the Lumora Help Center. Our dedicated support team is committed to ensuring you have a seamless experience with our smart lighting products.\n\nIf you encounter any connectivity or hardware issues, please consult our troubleshooting guides or reach out to our technical support staff for prompt, professional assistance.',
+      'Setup Guides': 'Our smart devices are designed for intuitive installation.\n\n1. Download the Lumora mobile application.\n2. Connect the device to a standard power outlet.\n3. Follow the on-screen instructions to pair the device with your local Wi-Fi network.\n\nFor detailed configuration options and advanced integrations, please refer to the comprehensive user manual provided in the packaging.',
+      'Contact Us': 'We value your feedback and inquiries. You can reach our customer service representatives via email at support@lumora.com or by calling our toll-free number.\n\nOur official business hours are Monday through Friday, 9:00 AM to 5:00 PM EST. We strive to respond to all communications within one business day.',
+      'Returns & Warranty': 'Lumora offers a comprehensive 1-year limited warranty on all hardware components, covering manufacturing defects and malfunctions under normal use conditions.\n\nIf you are not completely satisfied with your purchase, products may be returned in their original packaging within 30 days of receipt for a full refund.',
+      'Privacy Policy': 'Lumora respects your privacy and is committed to protecting your personal data. We only collect essential information required to operate and improve your smart home experience.\n\nWe do not sell, distribute, or lease your personal information to third parties unless we have your explicit permission or are required by law to do so.',
+      'Terms of Service': 'By accessing and using Lumora products and services, you agree to comply with our terms and conditions.\n\nThese terms govern the usage of our proprietary software and hardware. Any unauthorized modification or reverse engineering of Lumora devices is strictly prohibited and will void all applicable warranties.',
+      'Cookies': 'Our website utilizes cookies and similar tracking technologies to enhance user experience, analyze site traffic, and optimize performance.\n\nBy continuing to navigate our website, you consent to our use of cookies in accordance with our standard data policy. You may manage your cookie preferences through your browser settings.'
+    };
+
+    function showPopup(event, key) {
+      event.preventDefault();
+      document.getElementById('popup-title').innerText = key;
+      document.getElementById('popup-body').innerText = popupContent[key];
+      const popup = document.getElementById('info-popup');
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+    }
+
+    function closePopup() {
+      const popup = document.getElementById('info-popup');
+      popup.classList.add('hidden');
+      popup.classList.remove('flex');
+    }
+  </script>
+
+  <!-- Scripts for Store Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Add to Cart Logic
+      const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+      const cartCount = document.getElementById('cart-count');
+      let itemsInCart = 2; // initial value
+
+      addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault(); // Prevent navigating to product.html
+          itemsInCart++;
+          cartCount.innerText = itemsInCart;
+          
+          // Fun little animation
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '✅';
+          btn.style.backgroundColor = '#00FF66';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.backgroundColor = '';
+          }, 1000);
+        });
+      });
+
+      // 2. Load More Logic
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      const hiddenProducts = document.querySelectorAll('.hidden-product');
+      loadMoreBtn.addEventListener('click', () => {
+        hiddenProducts.forEach(el => el.classList.remove('hidden-product'));
+        loadMoreBtn.style.display = 'none';
+        updateProductCount();
+      });
+
+      // 3. Filtering Logic
+      const categoryCheckboxes = document.querySelectorAll('#category-filters input[type="checkbox"]');
+      const priceRadios = document.querySelectorAll('#price-filters input[type="radio"]');
+      const allProducts = document.querySelectorAll('.product-card');
+      const productCountEl = document.getElementById('product-count');
+
+      function filterProducts() {
+        // Get active categories
+        const activeCategories = Array.from(categoryCheckboxes)
+          .filter(cb => cb.checked)
+          .map(cb => cb.value);
+        
+        // Handle "All Systems" checkbox
+        const isAllCategories = activeCategories.includes('all') || activeCategories.length === 0;
+
+        // Get active price range
+        const activePrice = document.querySelector('#price-filters input[type="radio"]:checked').value;
+
+        let visibleCount = 0;
+
+        allProducts.forEach(card => {
+          // Check category
+          const category = card.getAttribute('data-category');
+          const matchesCategory = isAllCategories || activeCategories.includes(category);
+
+          // Check price
+          const price = parseFloat(card.getAttribute('data-price'));
+          let matchesPrice = true;
+          if (activePrice === 'under50' && price >= 50) matchesPrice = false;
+          if (activePrice === '50to150' && (price < 50 || price > 150)) matchesPrice = false;
+          if (activePrice === 'over150' && price <= 150) matchesPrice = false;
+
+          // Apply display
+          if (matchesCategory && matchesPrice) {
+            // Only show if it's not hidden by the "Load More" logic
+            if(!card.classList.contains('hidden-product')) {
+              card.style.display = 'block';
+              visibleCount++;
+            }
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        productCountEl.innerText = visibleCount;
+      }
+
+      function updateProductCount() {
+        filterProducts();
+      }
+
+      // Add event listeners
+      categoryCheckboxes.forEach(cb => {
+        cb.addEventListener('change', (e) => {
+          if(e.target.value === 'all') {
+             categoryCheckboxes.forEach(c => { if(c !== e.target) c.checked = false; });
+          } else {
+             document.querySelector('input[value="all"]').checked = false;
+          }
+          filterProducts();
+        });
+      });
+      priceRadios.forEach(radio => radio.addEventListener('change', filterProducts));
+    });
+  </script>
+</body>
+</html>

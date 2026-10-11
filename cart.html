@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMORA! | Your Cart</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800;900&family=Titan+One&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { candy: ['"Titan One"', 'cursive'], sans: ['Fredoka', 'sans-serif'], },
+          colors: { candy: { pink: '#FF4DB8', blue: '#00D4FF', yellow: '#FFDF00', green: '#00FF66', purple: '#B533FF', bg: '#FFF5F8', black: '#1A1A1A', }, },
+          boxShadow: { 'brutal': '8px 8px 0px 0px rgba(26,26,26,1)', 'brutal-sm': '4px 4px 0px 0px rgba(26,26,26,1)', },
+          animation: { 'wobble': 'wobble 4s ease-in-out infinite', },
+          keyframes: { wobble: { '0%, 100%': { transform: 'rotate(-3deg)' }, '50%': { transform: 'rotate(3deg)' }, } },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { background-color: #FFF5F8; color: #1A1A1A; background-image: radial-gradient(#FF4DB8 1px, transparent 1px); background-size: 40px 40px; }
+    .text-stroke { -webkit-text-stroke: 3px #1A1A1A; color: #FFF; }
+    .btn-brutal { transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer;}
+    .btn-brutal:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px 0px rgba(26,26,26,1); }
+    ::-webkit-scrollbar { width: 16px; }
+    ::-webkit-scrollbar-track { background: #FFF5F8; border-left: 4px solid #1A1A1A; }
+    ::-webkit-scrollbar-thumb { background: #FF4DB8; border-left: 4px solid #1A1A1A; border-bottom: 4px solid #1A1A1A; }
+  </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-candy-yellow selection:text-candy-black">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 w-full z-50 bg-candy-blue border-b-8 border-candy-black shadow-brutal-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="index.html" class="flex items-center gap-2 transform hover:scale-105 transition-transform">
+        <div class="w-10 h-10 bg-candy-yellow border-4 border-candy-black rounded-full flex items-center justify-center animate-wobble">
+          <span class="text-xl">✨</span>
+        </div>
+        <span class="font-candy text-3xl tracking-wide text-white text-stroke drop-shadow-md">LUMORA!</span>
+      </a>
+      <nav class="hidden md:flex gap-8 font-black text-xl tracking-wide">
+        <a href="shop.html" class="hover:text-candy-yellow hover:underline decoration-4 underline-offset-4 transition-colors">SYSTEMS</a>
+        <a href="index.html#use-cases" class="hover:text-candy-pink hover:underline decoration-4 underline-offset-4 transition-colors">ROUTINES</a>
+        <a href="index.html#lifestyle" class="hover:text-candy-green hover:underline decoration-4 underline-offset-4 transition-colors">LIFESTYLE</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="cart.html" class="relative w-12 h-12 bg-white border-4 border-candy-black rounded-full shadow-brutal-sm hover:translate-x-1 hover:-translate-y-1 hover:shadow-brutal transition-all flex items-center justify-center text-xl cursor-pointer">
+          🛒
+          <span id="nav-cart-count" class="absolute -top-2 -right-2 w-6 h-6 bg-candy-pink text-white border-2 border-candy-black rounded-full text-xs font-black flex items-center justify-center">2</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CART PAGE -->
+  <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+    
+    <div id="cart-header" class="text-center mb-12 transform -skew-y-2">
+      <h1 class="font-candy text-6xl md:text-8xl text-white text-stroke drop-shadow-xl">YOUR CART 🛒</h1>
+    </div>
+
+    <!-- MAIN CART CONTENT -->
+    <div id="cart-main-content" class="flex flex-col lg:flex-row gap-12 items-start">
+      
+      <!-- Cart Items List -->
+      <div class="w-full lg:w-2/3 space-y-6" id="cart-items-container">
+        
+        <!-- Cart Item 1 -->
+        <div class="cart-item bg-white border-6 border-candy-black rounded-[2rem] p-6 shadow-brutal flex flex-col sm:flex-row gap-6 items-center" data-price="29.99">
+          <div class="w-32 h-32 bg-candy-pink/15 rounded-2xl border-4 border-candy-black overflow-hidden flex-shrink-0 flex items-center justify-center p-2 group relative">
+            <img src="images/product_bulb_1.png" alt="Lumora Glow Bulb" class="w-full h-full object-contain hover:scale-110 transition-transform duration-300 drop-shadow-md" />
+            <a href="product.html" class="absolute bottom-1 right-1 bg-candy-yellow text-candy-black border-2 border-candy-black text-[10px] font-black px-1.5 py-0.5 rounded-full shadow-sm hover:scale-105">4 VIEWS 🔍</a>
+          </div>
+          <div class="flex-1 text-center sm:text-left">
+            <h3 class="font-black text-3xl mb-1"><a href="product.html" class="hover:underline decoration-4">Lumora Glow Bulb</a></h3>
+            <p class="font-bold text-gray-500 mb-2">Color Changing Smart Light • Multi-View Studio</p>
+            <button class="remove-btn font-black text-red-500 hover:underline decoration-4">REMOVE 🗑️</button>
+          </div>
+          <div class="flex flex-col items-center gap-4">
+            <span class="font-candy text-4xl text-candy-pink text-stroke item-price-display">₹2,499</span>
+            <div class="flex items-center bg-candy-bg border-4 border-candy-black rounded-full p-1 shadow-brutal-sm">
+              <button class="dec-btn w-8 h-8 font-black text-xl bg-white rounded-full hover:bg-candy-yellow transition-colors">-</button>
+              <span class="qty-display w-8 text-center font-black text-xl">1</span>
+              <button class="inc-btn w-8 h-8 font-black text-xl bg-white rounded-full hover:bg-candy-blue transition-colors">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cart Item 2 -->
+        <div class="cart-item bg-white border-6 border-candy-black rounded-[2rem] p-6 shadow-brutal flex flex-col sm:flex-row gap-6 items-center transform rotate-1" data-price="49.99">
+          <div class="w-32 h-32 bg-candy-blue/15 rounded-2xl border-4 border-candy-black overflow-hidden flex-shrink-0 flex items-center justify-center p-2 group relative">
+            <img src="images/product_hub_mini.png" alt="Brain Box Mini" class="w-full h-full object-contain hover:scale-110 transition-transform duration-300 drop-shadow-md" />
+            <span class="absolute bottom-1 right-1 bg-candy-blue text-white border-2 border-candy-black text-[10px] font-black px-1.5 py-0.5 rounded-full shadow-sm">STUDIO 🔍</span>
+          </div>
+          <div class="flex-1 text-center sm:text-left">
+            <h3 class="font-black text-3xl mb-1">Brain Box Mini</h3>
+            <p class="font-bold text-gray-500 mb-2">Smart Speaker Hub • Puck Edition</p>
+            <button class="remove-btn font-black text-red-500 hover:underline decoration-4">REMOVE 🗑️</button>
+          </div>
+          <div class="flex flex-col items-center gap-4">
+            <span class="font-candy text-4xl text-candy-blue text-stroke item-price-display">₹3,999</span>
+            <div class="flex items-center bg-candy-bg border-4 border-candy-black rounded-full p-1 shadow-brutal-sm">
+              <button class="dec-btn w-8 h-8 font-black text-xl bg-white rounded-full hover:bg-candy-yellow transition-colors">-</button>
+              <span class="qty-display w-8 text-center font-black text-xl">1</span>
+              <button class="inc-btn w-8 h-8 font-black text-xl bg-white rounded-full hover:bg-candy-blue transition-colors">+</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Empty State (Hidden by default) -->
+        <div id="empty-state" class="hidden bg-white border-6 border-candy-black rounded-[2rem] p-12 shadow-brutal text-center">
+            <h3 class="font-candy text-4xl text-candy-black mb-4">YOUR CART IS EMPTY</h3>
+            <p class="font-bold text-gray-500 mb-6">Looks like you need to build your smart home system!</p>
+            <a href="shop.html" class="inline-block btn-brutal bg-candy-yellow text-candy-black font-black text-xl px-8 py-4 border-4 border-candy-black rounded-full shadow-brutal-sm tracking-wide">
+              START SHOPPING
+            </a>
+        </div>
+
+      </div>
+
+      <!-- Checkout Summary Box -->
+      <div class="w-full lg:w-1/3 flex flex-col gap-8 sticky top-36">
+        <div class="bg-candy-yellow border-6 border-candy-black rounded-[2.5rem] p-8 shadow-brutal transform rotate-2">
+          <h2 class="font-candy text-4xl text-white text-stroke mb-6">SUMMARY</h2>
+          
+          <div class="space-y-4 font-black text-xl mb-6 pb-6 border-b-4 border-candy-black border-dashed">
+            <div class="flex justify-between">
+              <span>Subtotal</span>
+              <span id="subtotal-display">₹6,498</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Shipping</span>
+              <span class="text-green-600">FREE!</span>
+            </div>
+            <div class="flex justify-between text-gray-500">
+              <span>Taxes (8%)</span>
+              <span id="tax-display">₹520</span>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-end mb-8">
+            <span class="font-black text-2xl">TOTAL:</span>
+            <span id="total-display" class="font-candy text-5xl text-candy-pink text-stroke">₹7,018</span>
+          </div>
+
+          <!-- Promo Code -->
+          <div class="flex mb-8">
+            <input type="text" placeholder="PROMO CODE" class="w-full border-4 border-r-0 border-candy-black rounded-l-2xl px-4 py-3 font-black focus:outline-none uppercase" />
+            <button class="bg-candy-black text-white border-4 border-candy-black rounded-r-2xl px-4 font-black hover:bg-gray-800 transition-colors">APPLY</button>
+          </div>
+
+          <!-- Razorpay Checkout button -->
+          <div class="space-y-3">
+            <button id="razorpay-btn" class="w-full btn-brutal bg-candy-blue text-white font-black text-xl px-8 py-4 border-6 border-candy-black rounded-full shadow-brutal tracking-wide text-center uppercase flex items-center justify-center gap-3 group">
+              <svg viewBox="0 0 458 458" class="w-6 h-6" fill="currentColor"><path d="M457.734,136.215L150.985,458l-59.516-16.711l157.07-164.711h-165.71l-14.93-41.977l52.125-234.602h323.078 L457.734,136.215z M186.227,159.985l46.21,13.063l-28.797,30.344h-58.422l-4.492,20.086h44.133l46.203,13.063l-43.164,45.242h-74.195 l-11.836,53.227l45.258,12.789h89.375L356.57,117.828H140.406l-9.422,42.156H186.227z"/></svg>
+              PAY WITH RAZORPAY <span class="inline-block group-hover:translate-x-2 transition-transform">🚀</span>
+            </button>
+          </div>
+          
+          <p class="text-center font-bold mt-4 text-xs flex items-center justify-center gap-1.5 text-candy-black">
+            <span>🔒</span> Razorpay Live Sandbox: <code class="bg-white/80 px-1 py-0.5 rounded border border-black text-[10px]">rzp_test_TmLVk1wSiJ8rEF</code>
+          </p>
+        </div>
+
+        <!-- Upsell / Cross-sell -->
+        <div class="bg-white border-6 border-candy-black rounded-[2rem] p-6 shadow-brutal-sm transform -rotate-1">
+          <h3 class="font-candy text-2xl text-candy-pink text-stroke drop-shadow-sm mb-4">RECOMMENDED ADD-ON</h3>
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-20 bg-candy-green/15 rounded-xl border-4 border-candy-black overflow-hidden flex-shrink-0 flex items-center justify-center p-1.5">
+              <img src="images/product_plug_mini.png" alt="Smart Plug Mini" class="w-full h-full object-contain hover:scale-110 transition-transform duration-300 drop-shadow-sm" />
+            </div>
+            <div class="flex-1">
+              <h4 class="font-black text-lg">Smart Plug Mini</h4>
+              <p class="font-bold text-candy-blue text-lg">₹1,199</p>
+            </div>
+            <button id="add-upsell-btn" class="bg-candy-yellow w-10 h-10 border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl hover:scale-110 transition-transform">
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         ORDER SUCCESS SHOWCASE (Revealed dynamically upon payment)
+         ═══════════════════════════════════════════════════════════ -->
+    <div id="order-success-section" class="hidden max-w-4xl mx-auto space-y-8 animate-fade-in">
+      
+      <!-- Celebratory Banner -->
+      <div class="bg-candy-yellow border-8 border-candy-black rounded-[3rem] p-8 md:p-12 shadow-brutal text-center relative overflow-hidden transform -rotate-1">
+        <div class="absolute -top-12 -right-12 w-40 h-40 bg-candy-pink rounded-full border-4 border-candy-black opacity-30 animate-pulse"></div>
+        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-candy-blue rounded-full border-4 border-candy-black opacity-30 animate-pulse"></div>
+        
+        <div class="w-24 h-24 bg-white border-6 border-candy-black rounded-full mx-auto flex items-center justify-center text-5xl mb-6 shadow-brutal animate-bounce">
+          🎉
+        </div>
+
+        <div class="inline-block bg-candy-green text-candy-black font-black text-sm md:text-base px-6 py-2 border-4 border-candy-black rounded-full uppercase tracking-wider mb-4 shadow-brutal-sm">
+          ⚡ PAYMENT CONFIRMED • RAZORPAY TEST GATEWAY
+        </div>
+
+        <h2 class="font-candy text-5xl md:text-7xl text-white text-stroke mb-4 leading-tight">
+          ORDER PLACED!
+        </h2>
+
+        <p class="font-bold text-2xl text-candy-black max-w-2xl mx-auto mb-8">
+          WOOHOO! Your smart home upgrade is officially booked! Get ready for maximum room ambience!
+        </p>
+
+        <!-- Order ID pill -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-3 bg-white border-4 border-candy-black px-6 py-3 rounded-2xl shadow-brutal-sm font-black text-lg">
+          <span>ORDER REF:</span>
+          <span id="success-order-id" class="text-candy-pink font-candy text-3xl tracking-wider">#LUM-2026-84920</span>
+          <button onclick="copyOrderId()" class="btn-brutal bg-candy-yellow hover:bg-candy-blue hover:text-white border-2 border-candy-black rounded-lg px-3 py-1 text-xs uppercase shadow-sm">
+            📋 COPY ID
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Delivery Tracker Stepper -->
+      <div class="bg-white border-6 border-candy-black rounded-[2.5rem] p-8 shadow-brutal">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <h3 class="font-candy text-3xl text-candy-blue text-stroke">DELIVERY PIPELINE</h3>
+          <span class="inline-block bg-candy-pink text-white font-black text-sm px-4 py-2 border-3 border-candy-black rounded-full shadow-sm">
+            ESTIMATED: TOMORROW BY 2:00 PM 🚀
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- Step 1 -->
+          <div class="bg-candy-green/20 border-4 border-candy-black rounded-2xl p-4 text-center">
+            <div class="w-10 h-10 bg-candy-green text-white border-3 border-candy-black rounded-full flex items-center justify-center mx-auto mb-2 font-black text-lg">✓</div>
+            <h4 class="font-black text-lg">Order Paid</h4>
+            <p class="text-xs font-bold text-gray-600">Verified via Razorpay</p>
+          </div>
+          <!-- Step 2 -->
+          <div class="bg-candy-yellow/40 border-4 border-candy-black rounded-2xl p-4 text-center ring-4 ring-candy-yellow animate-pulse">
+            <div class="w-10 h-10 bg-candy-yellow border-3 border-candy-black rounded-full flex items-center justify-center mx-auto mb-2 font-black text-lg">📦</div>
+            <h4 class="font-black text-lg">Vibe Testing</h4>
+            <p class="text-xs font-bold text-gray-600">Hardware bench check</p>
+          </div>
+          <!-- Step 3 -->
+          <div class="bg-gray-100 border-4 border-candy-black rounded-2xl p-4 text-center opacity-70">
+            <div class="w-10 h-10 bg-white border-3 border-candy-black rounded-full flex items-center justify-center mx-auto mb-2 font-black text-lg">🚚</div>
+            <h4 class="font-black text-lg">Dispatching</h4>
+            <p class="text-xs font-bold text-gray-500">Express Smart Air</p>
+          </div>
+          <!-- Step 4 -->
+          <div class="bg-gray-100 border-4 border-candy-black rounded-2xl p-4 text-center opacity-70">
+            <div class="w-10 h-10 bg-white border-3 border-candy-black rounded-full flex items-center justify-center mx-auto mb-2 font-black text-lg">✨</div>
+            <h4 class="font-black text-lg">Smart Home Bliss</h4>
+            <p class="text-xs font-bold text-gray-500">Unbox & pair with app</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Itemized Receipt Card -->
+      <div class="bg-white border-6 border-candy-black rounded-[2.5rem] p-8 shadow-brutal">
+        <h3 class="font-candy text-3xl text-candy-pink text-stroke mb-6">OFFICIAL RECEIPT</h3>
+        
+        <div id="receipt-items-list" class="space-y-4 mb-6 pb-6 border-b-4 border-candy-black border-dashed">
+          <!-- Dynamically inserted by JS -->
+        </div>
+
+        <div class="space-y-3 font-black text-xl">
+          <div class="flex justify-between text-gray-600">
+            <span>Razorpay Payment ID</span>
+            <span id="receipt-payment-id" class="font-mono text-sm bg-gray-100 px-3 py-1 rounded-lg border-2 border-candy-black">pay_...</span>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <span>Shipping</span>
+            <span class="text-green-600">FREE EXPRESS (₹0)</span>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <span>Taxes Included (8%)</span>
+            <span id="receipt-tax">₹520</span>
+          </div>
+          <div class="flex justify-between items-center text-3xl pt-4 border-t-4 border-candy-black">
+            <span>AMOUNT CHARGED</span>
+            <span id="receipt-total" class="font-candy text-4xl text-candy-blue text-stroke">₹7,018</span>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-6 border-t-4 border-candy-black/10">
+          <button onclick="window.print()" class="btn-brutal bg-candy-yellow text-candy-black font-black text-lg py-4 px-6 rounded-full border-4 border-candy-black shadow-brutal-sm text-center">
+            PRINT RECEIPT 🖨️
+          </button>
+          <a href="shop.html" class="btn-brutal bg-candy-blue text-white font-black text-lg py-4 px-6 rounded-full border-4 border-candy-black shadow-brutal-sm text-center">
+            SHOP MORE 🛍️
+          </a>
+          <button onclick="location.reload()" class="btn-brutal bg-candy-pink text-white font-black text-lg py-4 px-6 rounded-full border-4 border-candy-black shadow-brutal-sm text-center">
+            NEW ORDER 🔄
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         ORDER FAILURE MODAL
+         ═══════════════════════════════════════════════════════════ -->
+    <div id="order-failure-modal" class="hidden fixed inset-0 z-[150] items-center justify-center bg-candy-black/85 backdrop-blur-md p-4">
+      <div class="bg-white border-8 border-candy-black shadow-brutal p-8 md:p-12 rounded-[3rem] max-w-xl w-full relative transform -rotate-1 text-center">
+        
+        <button onclick="closeFailureModal()" class="absolute -top-4 -right-4 w-12 h-12 bg-candy-yellow text-candy-black border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center font-black text-2xl hover:bg-candy-pink hover:text-white transition-colors z-10">✕</button>
+
+        <div class="w-20 h-20 bg-red-100 border-6 border-candy-black rounded-full mx-auto flex items-center justify-center text-4xl mb-6 shadow-brutal animate-bounce">
+          💔
+        </div>
+
+        <div class="inline-block bg-candy-pink text-white font-black text-xs px-4 py-1.5 border-3 border-candy-black rounded-full uppercase tracking-wider mb-4 shadow-sm">
+          PAYMENT NOT COMPLETED • RAZORPAY TEST
+        </div>
+
+        <h2 class="font-candy text-4xl md:text-5xl text-candy-pink text-stroke mb-4 leading-tight">
+          PAYMENT FAILED!
+        </h2>
+
+        <p id="failure-reason-text" class="font-bold text-xl text-candy-black mb-6 leading-relaxed">
+          The transaction was interrupted or declined on the test gateway. Your cart items are completely safe and untouched!
+        </p>
+
+        <div class="bg-candy-bg border-4 border-candy-black rounded-2xl p-4 text-left font-mono text-xs md:text-sm mb-8 space-y-1">
+          <p><strong>Error Code:</strong> <span id="failure-error-code" class="text-red-600">GATEWAY_DECLINED</span></p>
+          <p><strong>Reason:</strong> <span id="failure-error-desc" class="text-gray-700">Transaction cancelled or declined</span></p>
+          <p><strong>Cart Status:</strong> <span class="text-green-600 font-bold">Preserved (₹6,498 subtotal saved)</span></p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button onclick="retryCheckout()" class="flex-1 btn-brutal bg-candy-green text-candy-black font-black text-xl py-4 px-6 rounded-full border-4 border-candy-black shadow-brutal">
+            TRY AGAIN 🔄
+          </button>
+          <button onclick="closeFailureModal()" class="btn-brutal bg-candy-yellow text-candy-black font-black text-xl py-4 px-6 rounded-full border-4 border-candy-black shadow-brutal">
+            BACK TO CART 🛒
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONFETTI CANVAS -->
+    <canvas id="confetti-canvas" class="pointer-events-none fixed inset-0 z-[200] hidden"></canvas>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast-notification" class="fixed bottom-8 right-8 z-[250] bg-candy-black text-white border-4 border-candy-yellow font-black px-6 py-3 rounded-2xl shadow-brutal text-lg transform translate-y-32 transition-transform duration-300">
+      Toast Message
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-candy-blue border-t-8 border-candy-black pt-10 pb-10 px-6 mt-20">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 font-black text-lg mb-16">
+        
+        <div class="col-span-1 md:col-span-2">
+          <h4 class="font-candy text-5xl text-white text-stroke mb-4">LUMORA!</h4>
+          <p class="text-xl mb-6">Making homes smarter, one intelligent device at a time. The future is connected.</p>
+          <div class="bg-white border-4 border-candy-black shadow-brutal-sm p-4 rounded-xl transform -rotate-1 inline-block">
+            <h5 class="text-2xl bg-candy-pink text-white inline-block px-3 py-1 mb-2 transform -skew-x-6">DEVELOPED BY</h5>
+            <ul class="text-lg space-y-1">
+              <li><strong>Name:</strong> Jatin Watwani</li>
+              <li><strong>Roll No:</strong> 27069</li>
+              <li><strong>Branch:</strong> SY BTech AIML</li>
+              <li><strong>College:</strong> Modern College of Engineering, Pune</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">SHOP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Smart Lights</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Cameras & Locks</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Climate Control</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Hubs & Audio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">HELP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="#" onclick="showPopup(event, 'Help Center')" class="hover:text-white transition-colors hover:underline decoration-4">Help Center</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Setup Guides')" class="hover:text-white transition-colors hover:underline decoration-4">Setup Guides</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Contact Us')" class="hover:text-white transition-colors hover:underline decoration-4">Contact Us</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Returns & Warranty')" class="hover:text-white transition-colors hover:underline decoration-4">Returns & Warranty</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t-4 border-candy-black pt-8 flex flex-col md:flex-row justify-between items-center gap-6 font-black text-sm uppercase">
+        <p>© 2026 LUMORA INC. POWERED BY TECH.</p>
+        <div class="flex gap-6">
+          <a href="#" onclick="showPopup(event, 'Privacy Policy')" class="hover:text-white">PRIVACY</a>
+          <a href="#" onclick="showPopup(event, 'Terms of Service')" class="hover:text-white">TERMS</a>
+          <a href="#" onclick="showPopup(event, 'Cookies')" class="hover:text-white">COOKIES</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- INFO POPUP MODAL -->
+  <div id="info-popup" class="hidden fixed inset-0 z-[100] items-center justify-center bg-candy-black/80 backdrop-blur-sm p-4">
+    <div class="bg-white border-8 border-candy-black shadow-brutal p-8 md:p-12 rounded-[2rem] max-w-2xl w-full relative transform -rotate-1">
+      <button onclick="closePopup()" class="absolute -top-4 -right-4 w-12 h-12 bg-candy-pink text-white border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center font-black text-2xl hover:bg-candy-yellow hover:text-candy-black transition-colors z-10">X</button>
+      <h2 id="popup-title" class="font-candy text-3xl md:text-5xl text-candy-blue text-stroke drop-shadow-md mb-6 uppercase">Title</h2>
+      <p id="popup-body" class="font-bold text-lg md:text-xl leading-relaxed text-candy-black whitespace-pre-wrap">Body content goes here.</p>
+    </div>
+  </div>
+
+  <script>
+    const popupContent = {
+      'Help Center': 'Welcome to the Lumora Help Center. Our dedicated support team is committed to ensuring you have a seamless experience with our smart lighting products.\n\nIf you encounter any connectivity or hardware issues, please consult our troubleshooting guides or reach out to our technical support staff for prompt, professional assistance.',
+      'Setup Guides': 'Our smart devices are designed for intuitive installation.\n\n1. Download the Lumora mobile application.\n2. Connect the device to a standard power outlet.\n3. Follow the on-screen instructions to pair the device with your local Wi-Fi network.\n\nFor detailed configuration options and advanced integrations, please refer to the comprehensive user manual provided in the packaging.',
+      'Contact Us': 'We value your feedback and inquiries. You can reach our customer service representatives via email at support@lumora.com or by calling our toll-free number.\n\nOur official business hours are Monday through Friday, 9:00 AM to 5:00 PM EST. We strive to respond to all communications within one business day.',
+      'Returns & Warranty': 'Lumora offers a comprehensive 1-year limited warranty on all hardware components, covering manufacturing defects and malfunctions under normal use conditions.\n\nIf you are not completely satisfied with your purchase, products may be returned in their original packaging within 30 days of receipt for a full refund.',
+      'Privacy Policy': 'Lumora respects your privacy and is committed to protecting your personal data. We only collect essential information required to operate and improve your smart home experience.\n\nWe do not sell, distribute, or lease your personal information to third parties unless we have your explicit permission or are required by law to do so.',
+      'Terms of Service': 'By accessing and using Lumora products and services, you agree to comply with our terms and conditions.\n\nThese terms govern the usage of our proprietary software and hardware. Any unauthorized modification or reverse engineering of Lumora devices is strictly prohibited and will void all applicable warranties.',
+      'Cookies': 'Our website utilizes cookies and similar tracking technologies to enhance user experience, analyze site traffic, and optimize performance.\n\nBy continuing to navigate our website, you consent to our use of cookies in accordance with our standard data policy. You may manage your cookie preferences through your browser settings.'
+    };
+
+    function showPopup(event, key) {
+      event.preventDefault();
+      document.getElementById('popup-title').innerText = key;
+      document.getElementById('popup-body').innerText = popupContent[key];
+      const popup = document.getElementById('info-popup');
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+    }
+
+    function closePopup() {
+      const popup = document.getElementById('info-popup');
+      popup.classList.add('hidden');
+      popup.classList.remove('flex');
+    }
+  </script>
+
+  <!-- Scripts for Cart Logic -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const emptyState = document.getElementById('empty-state');
+      const subtotalDisplay = document.getElementById('subtotal-display');
+      const taxDisplay = document.getElementById('tax-display');
+      const totalDisplay = document.getElementById('total-display');
+      const navCartCount = document.getElementById('nav-cart-count');
+
+      // State
+      let cart = [
+        { id: 1, name: 'Lumora Glow Bulb', price: 2499, qty: 1, img: 'images/product_bulb_1.png', element: document.querySelectorAll('.cart-item')[0] },
+        { id: 2, name: 'Brain Box Mini', price: 3999, qty: 1, img: 'images/product_hub_mini.png', element: document.querySelectorAll('.cart-item')[1] }
+      ];
+
+      function renderCart() {
+        let subtotal = 0;
+        let totalItems = 0;
+
+        cart.forEach(item => {
+          subtotal += item.price * item.qty;
+          totalItems += item.qty;
+          
+          const qtyDisplay = item.element.querySelector('.qty-display');
+          const priceDisplay = item.element.querySelector('.item-price-display');
+          
+          qtyDisplay.innerText = item.qty;
+          priceDisplay.innerText = '₹' + (item.price * item.qty).toLocaleString('en-IN');
+        });
+
+        const tax = Math.round(subtotal * 0.08);
+        const total = subtotal + tax;
+
+        subtotalDisplay.innerText = '₹' + subtotal.toLocaleString('en-IN');
+        taxDisplay.innerText = '₹' + tax.toLocaleString('en-IN');
+        totalDisplay.innerText = '₹' + total.toLocaleString('en-IN');
+        navCartCount.innerText = totalItems;
+
+        const rzpBtn = document.getElementById('razorpay-btn');
+        if(cart.length === 0) {
+          emptyState.classList.remove('hidden');
+          rzpBtn.disabled = true;
+          rzpBtn.style.opacity = '0.5';
+        } else {
+          emptyState.classList.add('hidden');
+          rzpBtn.disabled = false;
+          rzpBtn.style.opacity = '1';
+        }
+      }
+
+      // Attach events to existing items
+      cart.forEach((item) => {
+        const incBtn = item.element.querySelector('.inc-btn');
+        const decBtn = item.element.querySelector('.dec-btn');
+        const removeBtn = item.element.querySelector('.remove-btn');
+
+        incBtn.addEventListener('click', () => { item.qty++; renderCart(); });
+        decBtn.addEventListener('click', () => { if (item.qty > 1) { item.qty--; renderCart(); } });
+        removeBtn.addEventListener('click', () => {
+          item.element.remove();
+          cart.splice(cart.indexOf(item), 1);
+          renderCart();
+        });
+      });
+
+      // Upsell Add
+      const addUpsellBtn = document.getElementById('add-upsell-btn');
+      addUpsellBtn.addEventListener('click', () => {
+        const newItemHTML = `
+        <div class="cart-item bg-white border-6 border-candy-black rounded-[2rem] p-6 shadow-brutal flex flex-col sm:flex-row gap-6 items-center transform -rotate-1" data-price="14.99">
+          <div class="w-32 h-32 bg-candy-green/15 rounded-2xl border-4 border-candy-black overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
+            <img src="images/product_plug_mini.png" alt="Smart Plug Mini" class="w-full h-full object-contain hover:scale-110 transition-transform duration-300 drop-shadow-sm" />
+          </div>
+          <div class="flex-1 text-center sm:text-left">
+            <h3 class="font-black text-3xl mb-1">Smart Plug Mini</h3>
+            <p class="font-bold text-gray-500 mb-2">Automate Any Appliance</p>
+            <button class="remove-btn font-black text-red-500 hover:underline decoration-4">REMOVE 🗑️</button>
+          </div>
+          <div class="flex flex-col items-center gap-4">
+            <span class="font-candy text-4xl text-candy-green text-stroke item-price-display">₹1,199</span>
+            <div class="flex items-center bg-candy-bg border-4 border-candy-black rounded-full p-1 shadow-brutal-sm">
+              <button class="dec-btn w-8 h-8 font-black text-xl bg-white rounded-full hover:bg-candy-yellow transition-colors">-</button>
+              <span class="qty-display w-8 text-center font-black text-xl">1</span>
+              <button class="inc-btn w-8 h-8 font-black text-xl bg-white rounded-full hover:bg-candy-blue transition-colors">+</button>
+            </div>
+          </div>
+        </div>`;
+        
+        emptyState.insertAdjacentHTML('beforebegin', newItemHTML);
+        const newEl = document.querySelectorAll('.cart-item')[document.querySelectorAll('.cart-item').length - 1];
+        
+        const newItemObj = { id: 3, name: 'Smart Plug Mini', price: 1199, qty: 1, img: 'images/product_plug_mini.png', element: newEl };
+        cart.push(newItemObj);
+
+        newEl.querySelector('.inc-btn').addEventListener('click', () => { newItemObj.qty++; renderCart(); });
+        newEl.querySelector('.dec-btn').addEventListener('click', () => { if(newItemObj.qty > 1) { newItemObj.qty--; renderCart(); } });
+        newEl.querySelector('.remove-btn').addEventListener('click', () => {
+          newEl.remove();
+          cart.splice(cart.indexOf(newItemObj), 1);
+          renderCart();
+        });
+
+        addUpsellBtn.parentElement.parentElement.style.display = 'none';
+        renderCart();
+      });
+
+      renderCart();
+
+      // ═══════════════════════════════════════════════════════════
+      // AUDIO SYNTHESIZER (Web Audio API - Zero External Dependencies)
+      // ═══════════════════════════════════════════════════════════
+      function getAudioContext() {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        return AudioCtx ? new AudioCtx() : null;
+      }
+
+      function playSuccessFanfare() {
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const notes = [
+            { f: 523.25, d: 0.12, t: 0.00 }, // C5
+            { f: 659.25, d: 0.12, t: 0.12 }, // E5
+            { f: 783.99, d: 0.12, t: 0.24 }, // G5
+            { f: 1046.50, d: 0.50, t: 0.36 } // C6 (High hold)
+          ];
+          notes.forEach(n => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(n.f, ctx.currentTime + n.t);
+            gain.gain.setValueAtTime(0, ctx.currentTime + n.t);
+            gain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + n.t + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.t + n.d);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime + n.t);
+            osc.stop(ctx.currentTime + n.t + n.d);
+          });
+        } catch (e) { console.log('Audio playback ignored:', e); }
+      }
+
+      function playFailureSound() {
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(320, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.4);
+          gain.gain.setValueAtTime(0.25, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.4);
+        } catch (e) { console.log('Audio playback ignored:', e); }
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // CONFETTI PHYSICS ENGINE (Candy Brutalist Particles)
+      // ═══════════════════════════════════════════════════════════
+      let confettiActive = false;
+      function startConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        canvas.classList.remove('hidden');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const ctx = canvas.getContext('2d');
+        const colors = ['#FF4DB8', '#00D4FF', '#FFDF00', '#00FF66', '#B533FF', '#1A1A1A'];
+        const particles = Array.from({ length: 90 }, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height * 0.5,
+          w: Math.random() * 12 + 6,
+          h: Math.random() * 12 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 4,
+          vy: Math.random() * 4 + 3,
+          rot: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 8
+        }));
+
+        confettiActive = true;
+        let start = performance.now();
+
+        function renderFrame(time) {
+          if (!confettiActive) return;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.vRot;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rot * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.strokeStyle = '#1A1A1A';
+            ctx.lineWidth = 1.5;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.strokeRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+
+            if (p.y > canvas.height) {
+              p.y = -20;
+              p.x = Math.random() * canvas.width;
+            }
+          });
+
+          if (time - start < 7000) {
+            requestAnimationFrame(renderFrame);
+          } else {
+            canvas.classList.add('hidden');
+            confettiActive = false;
+          }
+        }
+        requestAnimationFrame(renderFrame);
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // TOAST NOTIFICATION
+      // ═══════════════════════════════════════════════════════════
+      function showToast(msg) {
+        const toast = document.getElementById('toast-notification');
+        toast.innerText = msg;
+        toast.classList.remove('translate-y-32');
+        toast.classList.add('translate-y-0');
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0');
+          toast.classList.add('translate-y-32');
+        }, 2500);
+      }
+
+      window.copyOrderId = function() {
+        const orderId = document.getElementById('success-order-id').innerText;
+        navigator.clipboard.writeText(orderId).then(() => {
+          showToast('COPIED ORDER ID: ' + orderId + ' 📋✨');
+        });
+      };
+
+      // ═══════════════════════════════════════════════════════════
+      // ORDER SUCCESS EXPERIENCE
+      // ═══════════════════════════════════════════════════════════
+      window.showOrderSuccess = function(data = {}) {
+        playSuccessFanfare();
+        startConfetti();
+
+        // Generate identifiers
+        const generatedOrderId = '#LUM-2026-' + Math.floor(10000 + Math.random() * 90000);
+        const paymentId = data.paymentId || ('pay_test_' + Math.random().toString(36).substring(2, 10).toUpperCase());
+
+        document.getElementById('success-order-id').innerText = generatedOrderId;
+        document.getElementById('receipt-payment-id').innerText = paymentId;
+
+        // Build itemized breakdown
+        let subtotal = 0;
+        const receiptList = document.getElementById('receipt-items-list');
+        receiptList.innerHTML = '';
+
+        cart.forEach(item => {
+          const itemTotal = item.price * item.qty;
+          subtotal += itemTotal;
+          const row = document.createElement('div');
+          row.className = 'flex items-center gap-4 bg-candy-bg p-3 rounded-2xl border-2 border-candy-black';
+          row.innerHTML = `
+            <div class="w-16 h-16 bg-white rounded-xl border-3 border-candy-black flex items-center justify-center p-1 flex-shrink-0">
+              <img src="${item.img || 'images/product_bulb_1.png'}" class="w-full h-full object-contain" />
+            </div>
+            <div class="flex-1">
+              <h5 class="font-black text-lg">${item.name}</h5>
+              <p class="font-bold text-xs text-gray-500">Qty: ${item.qty} × ₹${item.price.toLocaleString('en-IN')}</p>
+            </div>
+            <span class="font-candy text-2xl text-candy-pink text-stroke">₹${itemTotal.toLocaleString('en-IN')}</span>
+          `;
+          receiptList.appendChild(row);
+        });
+
+        const tax = Math.round(subtotal * 0.08);
+        const grandTotal = subtotal + tax;
+
+        document.getElementById('receipt-tax').innerText = '₹' + tax.toLocaleString('en-IN');
+        document.getElementById('receipt-total').innerText = '₹' + grandTotal.toLocaleString('en-IN');
+
+        // Swap views
+        document.getElementById('cart-header').classList.add('hidden');
+        document.getElementById('cart-main-content').classList.add('hidden');
+        document.getElementById('order-success-section').classList.remove('hidden');
+
+        // Reset Cart State
+        navCartCount.innerText = '0';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      // ═══════════════════════════════════════════════════════════
+      // ORDER FAILURE EXPERIENCE
+      // ═══════════════════════════════════════════════════════════
+      window.showOrderFailure = function(error = {}) {
+        playFailureSound();
+        const modal = document.getElementById('order-failure-modal');
+        document.getElementById('failure-error-code').innerText = error.code || 'BAD_REQUEST_ERROR';
+        document.getElementById('failure-error-desc').innerText = error.description || 'Payment was declined or cancelled on test gateway.';
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      };
+
+      window.closeFailureModal = function() {
+        const modal = document.getElementById('order-failure-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      };
+
+      window.retryCheckout = function() {
+        closeFailureModal();
+        openRazorpay();
+      };
+
+      // ═══════════════════════════════════════════════════════════
+      // RAZORPAY INTEGRATION (Real Gateway Handler)
+      // ═══════════════════════════════════════════════════════════
+      const RAZORPAY_KEY = 'rzp_test_TmLVk1wSiJ8rEF';
+
+      function openRazorpay() {
+        let subtotal = 0;
+        cart.forEach(item => { subtotal += item.price * item.qty; });
+        if (subtotal <= 0) return;
+
+        const totalAmount = Math.round((subtotal + (subtotal * 0.08)) * 100); // In Paise
+        let isPaymentSuccessful = false;
+
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: totalAmount,
+          currency: 'INR',
+          name: 'LUMORA! SMART HOME',
+          description: 'Smart Hardware & Ambience Kit',
+          image: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+          handler: function (response) {
+            isPaymentSuccessful = true;
+            showOrderSuccess({
+              paymentId: response.razorpay_payment_id,
+              orderId: response.razorpay_order_id,
+              signature: response.razorpay_signature
+            });
+          },
+          prefill: {
+            name: 'Jatin Watwani',
+            email: 'jatin@lumora.test',
+            contact: '9876543210'
+          },
+          notes: {
+            college: 'Modern College of Engineering, Pune',
+            project: 'Smart Home EBR Ecosystem'
+          },
+          theme: {
+            color: '#FF4DB8'
+          },
+          modal: {
+            ondismiss: function () {
+              if (!isPaymentSuccessful) {
+                showOrderFailure({
+                  code: 'PAYMENT_CANCELLED',
+                  description: 'Checkout window was closed before payment completion. Your cart items are preserved!'
+                });
+              }
+            }
+          }
+        };
+
+        try {
+          const rzp = new Razorpay(options);
+          rzp.on('payment.failed', function (resp) {
+            isPaymentSuccessful = false;
+            console.error('Razorpay Error Response:', resp.error);
+            showOrderFailure({
+              code: (resp.error && resp.error.code) || 'GATEWAY_ERROR',
+              description: (resp.error && resp.error.description) || 'Payment was declined by the test gateway.'
+            });
+          });
+          rzp.open();
+        } catch (err) {
+          console.error('Razorpay init error:', err);
+          showOrderFailure({ code: 'INITIALIZATION_ERROR', description: err.message });
+        }
+      }
+
+      document.getElementById('razorpay-btn').onclick = function(e) {
+        e.preventDefault();
+        openRazorpay();
+      };
+
+      // Auto-trigger checkout if redirected with ?checkout=1 (e.g. from Buy It Now on product page)
+      if (window.location.search.includes('checkout') || window.location.hash.includes('checkout')) {
+        setTimeout(openRazorpay, 400);
+      }
+    });
+  </script>
+</body>
+</html>

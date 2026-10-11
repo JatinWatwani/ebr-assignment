@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMORA! Smart Home Tech</title>
+  
+  <!-- Google Fonts: Bubbly, Candy-like fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800;900&family=Titan+One&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            candy: ['"Titan One"', 'cursive'],
+            sans: ['Fredoka', 'sans-serif'],
+          },
+          colors: {
+            candy: {
+              pink: '#FF4DB8',    /* Hot Bubblegum Pink */
+              blue: '#00D4FF',    /* Electric Cyan */
+              yellow: '#FFDF00',  /* Lemon Drop */
+              green: '#00FF66',   /* Sour Apple */
+              purple: '#B533FF',  /* Grape */
+              bg: '#FFF5F8',      /* Very light pink background */
+              black: '#1A1A1A',   /* High contrast black */
+            },
+          },
+          boxShadow: {
+            'brutal': '8px 8px 0px 0px rgba(26,26,26,1)',
+            'brutal-sm': '4px 4px 0px 0px rgba(26,26,26,1)',
+            'brutal-hover': '12px 12px 0px 0px rgba(26,26,26,1)',
+          },
+          animation: {
+            'marquee': 'marquee 25s linear infinite',
+            'bounce-slow': 'bounce 3s infinite',
+            'wobble': 'wobble 4s ease-in-out infinite',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            wobble: {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' },
+            }
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FFF5F8;
+      color: #1A1A1A;
+      /* Subtle dot pattern for candy wrapper feel */
+      background-image: radial-gradient(#FF4DB8 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    
+    .text-stroke {
+      -webkit-text-stroke: 3px #1A1A1A;
+      color: #FFF;
+    }
+
+    .btn-brutal {
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-brutal:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0px 0px rgba(26,26,26,1);
+    }
+    .btn-brutal:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px 0px 0px rgba(26,26,26,1);
+    }
+
+    /* Chunky scrollbar */
+    ::-webkit-scrollbar { width: 16px; }
+    ::-webkit-scrollbar-track { background: #FFF5F8; border-left: 4px solid #1A1A1A; }
+    ::-webkit-scrollbar-thumb { background: #FF4DB8; border-left: 4px solid #1A1A1A; border-bottom: 4px solid #1A1A1A; }
+
+    /* Custom image borders */
+    .img-brutal {
+      border: 6px solid #1A1A1A;
+      border-radius: 2rem;
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased overflow-x-hidden selection:bg-candy-yellow selection:text-candy-black">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVBAR (Chunky, Sticky, Bright)
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="fixed top-0 w-full z-50 bg-candy-blue border-b-8 border-candy-black shadow-brutal-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 transform hover:scale-105 transition-transform">
+        <div class="w-10 h-10 bg-candy-yellow border-4 border-candy-black rounded-full flex items-center justify-center animate-wobble">
+          <span class="text-xl">✨</span>
+        </div>
+        <span class="font-candy text-3xl tracking-wide text-white text-stroke drop-shadow-md">LUMORA!</span>
+      </a>
+      
+      <!-- Desktop NavLinks -->
+      <nav class="hidden md:flex gap-8 font-black text-xl tracking-wide">
+        <a href="shop.html" class="hover:text-candy-yellow hover:underline decoration-4 underline-offset-4 transition-colors">SYSTEMS</a>
+        <a href="#use-cases" class="hover:text-candy-pink hover:underline decoration-4 underline-offset-4 transition-colors">ROUTINES</a>
+        <a href="#lifestyle" class="hover:text-candy-green hover:underline decoration-4 underline-offset-4 transition-colors">LIFESTYLE</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <!-- Cart -->
+        <a href="cart.html" class="relative w-12 h-12 bg-white border-4 border-candy-black rounded-full shadow-brutal-sm hover:translate-x-1 hover:-translate-y-1 hover:shadow-brutal transition-all flex items-center justify-center text-xl cursor-pointer">
+          🛒
+          <span class="absolute -top-2 -right-2 w-6 h-6 bg-candy-pink text-white border-2 border-candy-black rounded-full text-xs font-black flex items-center justify-center">2</span>
+        </a>
+        <!-- Mobile Menu -->
+        <button class="md:hidden w-12 h-12 bg-candy-yellow border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center text-xl font-black">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO (Massive, Bubbly, Eye-catching)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-16 px-6 text-center overflow-hidden">
+    
+    <!-- Floating background decorative shapes -->
+    <div class="absolute top-32 left-10 w-24 h-24 bg-candy-green border-4 border-candy-black rounded-full shadow-brutal animate-bounce-slow"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-candy-purple border-4 border-candy-black rounded-[2rem] rotate-12 shadow-brutal animate-wobble"></div>
+    <div class="absolute top-1/2 left-4 w-16 h-16 bg-candy-yellow border-4 border-candy-black rounded-full shadow-brutal animate-wobble"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+      
+      <!-- Eyebrow Tag -->
+      <div class="bg-candy-pink text-white font-black text-xl md:text-2xl px-6 py-2 border-4 border-candy-black rounded-full shadow-brutal-sm rotate-[-3deg] mb-8">
+        THE MOST PLAYFUL SMART HOME EVER ⚡
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-candy text-6xl md:text-8xl lg:text-9xl text-white text-stroke drop-shadow-xl leading-[0.9] mb-6">
+        PUT YOUR<br>
+        <span class="text-candy-yellow text-stroke">TECH</span> WHERE<br>
+        YOUR <span class="text-candy-blue text-stroke">HOUSE</span> IS.
+      </h1>
+
+      <p class="font-black text-2xl md:text-3xl bg-white px-6 py-3 border-4 border-candy-black rounded-2xl shadow-brutal-sm mb-12 transform rotate-2">
+        COMMAND YOUR HOME WITH STYLE.
+      </p>
+
+      <!-- Main CTAs -->
+      <div class="flex flex-col sm:flex-row gap-6">
+        <a href="shop.html" class="btn-brutal bg-candy-yellow text-candy-black font-black text-2xl px-10 py-5 border-4 border-candy-black rounded-full shadow-brutal inline-block tracking-wide">
+          BUILD YOUR SYSTEM 🚀
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Hero Image Placeholder Box -->
+    <div class="mt-16 w-full max-w-4xl mx-auto aspect-video bg-candy-blue rounded-[3rem] border-8 border-candy-black shadow-brutal overflow-hidden relative">
+      <img src="images/hero.jpg" class="w-full h-full object-cover" alt="Colorful Smart Home" />
+      <div class="absolute inset-0 bg-candy-pink mix-blend-color opacity-30"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MARQUEE (The "Ring for every thing" equivalent)
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="use-cases" class="py-12 bg-candy-green border-y-8 border-candy-black shadow-[0_12px_0px_#1A1A1A] relative z-20 overflow-hidden transform -skew-y-2 my-12">
+    
+    <div class="text-center mb-8 transform skew-y-2">
+      <h2 class="font-candy text-5xl md:text-6xl text-white text-stroke drop-shadow-md">A MODULE FOR EVERY ROUTINE!</h2>
+    </div>
+
+    <div class="flex gap-6 animate-marquee whitespace-nowrap transform skew-y-2">
+      <!-- Tag Array 1 -->
+      <div class="inline-flex items-center gap-3 bg-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🌅</span> MORNING ROUTINE
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-yellow border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🍿</span> MOVIE NIGHT
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-pink text-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🌴</span> VACATION MODE
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-blue text-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🎯</span> DEEP FOCUS
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-purple text-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🪩</span> PARTY MODE
+      </div>
+      
+      <!-- Duplicates for seamless loop -->
+      <div class="inline-flex items-center gap-3 bg-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🌅</span> MORNING ROUTINE
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-yellow border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🍿</span> MOVIE NIGHT
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-pink text-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🌴</span> VACATION MODE
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-blue text-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🎯</span> DEEP FOCUS
+      </div>
+      <div class="inline-flex items-center gap-3 bg-candy-purple text-white border-4 border-candy-black px-8 py-4 rounded-full shadow-brutal-sm text-2xl font-black shrink-0">
+        <span class="text-3xl">🪩</span> PARTY MODE
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       COLLECTIONS (The "Flavors")
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="collections" class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="text-center mb-16">
+        <div class="inline-block bg-candy-purple text-white font-black text-xl px-6 py-2 border-4 border-candy-black rounded-full shadow-brutal-sm mb-4 rotate-3">
+          CHOOSE YOUR SYSTEM
+        </div>
+        <h2 class="font-candy text-6xl md:text-7xl text-white text-stroke drop-shadow-xl">OUR <span class="text-candy-pink text-stroke">SMART</span> ECOSYSTEM</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+        
+        <!-- Collection 1: Lighting -->
+        <div class="relative group mt-0 md:mt-12">
+          <div class="absolute inset-0 bg-candy-yellow border-6 border-candy-black rounded-[2.5rem] shadow-brutal rotate-[-2deg] transition-transform group-hover:rotate-0"></div>
+          <div class="relative bg-white border-6 border-candy-black rounded-[2.5rem] p-6 h-full flex flex-col z-10 transform transition-transform group-hover:-translate-y-2">
+            <div class="aspect-square bg-candy-pink/15 rounded-3xl border-4 border-candy-black overflow-hidden mb-6 relative flex items-center justify-center p-6">
+              <img src="images/product_bulb_1.png" class="w-full h-full object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-500" alt="Lumora Glow Bulb" />
+              <div class="absolute top-3 right-3 bg-candy-yellow text-candy-black font-black text-xs px-3 py-1 border-3 border-candy-black rounded-full rotate-6 shadow-brutal-sm">
+                4 VIEWS
+              </div>
+            </div>
+            <h3 class="font-candy text-4xl mb-2 text-white text-stroke">SMART LIGHTS</h3>
+            <p class="font-bold text-xl mb-6">Match your mood. Set the scene. 16M colors of pure vibes.</p>
+            <a href="shop.html" class="mt-auto btn-brutal bg-candy-blue text-white font-black text-xl px-6 py-4 border-4 border-candy-black rounded-full shadow-brutal-sm text-center">
+              EXPLORE LIGHTS
+            </a>
+          </div>
+        </div>
+
+        <!-- Collection 2: Security -->
+        <div class="relative group">
+          <div class="absolute inset-0 bg-candy-pink border-6 border-candy-black rounded-[2.5rem] shadow-brutal rotate-[3deg] transition-transform group-hover:rotate-0"></div>
+          <div class="relative bg-white border-6 border-candy-black rounded-[2.5rem] p-6 h-full flex flex-col z-10 transform transition-transform group-hover:-translate-y-2">
+            <div class="aspect-square bg-candy-green/15 rounded-3xl border-4 border-candy-black overflow-hidden mb-6 relative flex items-center justify-center p-6">
+              <img src="images/product_camera.png" class="w-full h-full object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-500" alt="WatchDog Cam" />
+              <div class="absolute top-3 right-3 bg-candy-pink text-white font-black text-xs px-3 py-1 border-3 border-candy-black rounded-full -rotate-6 shadow-brutal-sm">
+                1080P HD
+              </div>
+            </div>
+            <h3 class="font-candy text-4xl mb-2 text-white text-stroke">CAMERAS & LOCKS</h3>
+            <p class="font-bold text-xl mb-6">Peace of mind, 24/7. See everything. Miss absolutely nothing.</p>
+            <a href="shop.html" class="mt-auto btn-brutal bg-candy-yellow text-candy-black font-black text-xl px-6 py-4 border-4 border-candy-black rounded-full shadow-brutal-sm text-center">
+              EXPLORE SECURITY
+            </a>
+          </div>
+        </div>
+
+        <!-- Collection 3: Climate -->
+        <div class="relative group mt-0 md:mt-12">
+          <div class="absolute inset-0 bg-candy-green border-6 border-candy-black rounded-[2.5rem] shadow-brutal rotate-[2deg] transition-transform group-hover:rotate-0"></div>
+          <div class="relative bg-white border-6 border-candy-black rounded-[2.5rem] p-6 h-full flex flex-col z-10 transform transition-transform group-hover:-translate-y-2">
+            <div class="aspect-square bg-candy-blue/15 rounded-3xl border-4 border-candy-black overflow-hidden mb-6 relative flex items-center justify-center p-6">
+              <img src="images/product_thermo.png" class="w-full h-full object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-500" alt="Chill Pill Thermo" />
+              <div class="absolute top-3 right-3 bg-candy-green text-candy-black font-black text-xs px-3 py-1 border-3 border-candy-black rounded-full rotate-3 shadow-brutal-sm">
+                OLED DIAL
+              </div>
+            </div>
+            <h3 class="font-candy text-4xl mb-2 text-white text-stroke">CLIMATE CONTROL</h3>
+            <p class="font-bold text-xl mb-6">Perfect temps, zero effort. Intelligent comfort for your space.</p>
+            <a href="shop.html" class="mt-auto btn-brutal bg-candy-pink text-white font-black text-xl px-6 py-4 border-4 border-candy-black rounded-full shadow-brutal-sm text-center">
+              EXPLORE CLIMATE
+            </a>
+          </div>
+        </div>
+
+        <!-- Collection 4: Hubs -->
+        <div class="relative group">
+          <div class="absolute inset-0 bg-candy-purple border-6 border-candy-black rounded-[2.5rem] shadow-brutal rotate-[-3deg] transition-transform group-hover:rotate-0"></div>
+          <div class="relative bg-white border-6 border-candy-black rounded-[2.5rem] p-6 h-full flex flex-col z-10 transform transition-transform group-hover:-translate-y-2">
+            <div class="aspect-square bg-candy-purple/15 rounded-3xl border-4 border-candy-black overflow-hidden mb-6 relative flex items-center justify-center p-6">
+              <img src="images/product_hub_mini.png" class="w-full h-full object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-500" alt="Brain Box Mini" />
+              <div class="absolute top-3 right-3 bg-candy-purple text-white font-black text-xs px-3 py-1 border-3 border-candy-black rounded-full -rotate-3 shadow-brutal-sm">
+                AUDIO HUB
+              </div>
+            </div>
+            <h3 class="font-candy text-4xl mb-2 text-white text-stroke">HUBS & AUDIO</h3>
+            <p class="font-bold text-xl mb-6">The massive brain of your home. Command center meets concert hall.</p>
+            <a href="shop.html" class="mt-auto btn-brutal bg-candy-green text-candy-black font-black text-xl px-6 py-4 border-4 border-candy-black rounded-full shadow-brutal-sm text-center">
+              EXPLORE HUBS
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LIFESTYLE GALLERY (Masonry scrapbook style)
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="lifestyle" class="py-24 px-6 bg-candy-purple border-y-8 border-candy-black shadow-[0_12px_0px_#1A1A1A] relative z-10 overflow-hidden">
+    
+    <!-- Background patterns -->
+    <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#FFF_2px,transparent_2px)] [background-size:32px_32px] opacity-20"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      
+      <div class="text-center mb-16">
+        <h2 class="font-candy text-6xl md:text-8xl text-candy-yellow text-stroke drop-shadow-xl rotate-[-2deg]">
+          SEE IT IN <span class="text-white text-stroke">ACTION!</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Item 1 -->
+        <div class="bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal rotate-2 hover:rotate-0 transition-transform">
+          <img src="images/lifestyle_bedroom.jpg" class="w-full aspect-[4/3] object-cover rounded-xl border-4 border-candy-black mb-4" />
+          <p class="font-black text-xl leading-tight">POV: You never have to get out of bed to turn off the lights again. 💤</p>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="bg-candy-blue border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal -rotate-2 hover:rotate-0 transition-transform sm:mt-12">
+          <img src="images/lifestyle_movie.jpg" class="w-full aspect-[4/3] object-cover rounded-xl border-4 border-candy-black mb-4" />
+          <p class="font-black text-white text-xl leading-tight">Movie night just got a serious glow-up. 🍿🎬</p>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="bg-candy-yellow border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal rotate-3 hover:rotate-0 transition-transform lg:mt-6">
+          <img src="images/lifestyle_doorbell.jpg" class="w-full aspect-[4/3] object-cover rounded-xl border-4 border-candy-black mb-4" />
+          <p class="font-black text-xl leading-tight">Did I lock the door? Yes. Yes, you did. 🚪🔒</p>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="bg-candy-pink border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal -rotate-3 hover:rotate-0 transition-transform">
+          <img src="images/lifestyle_kitchen.jpg" class="w-full aspect-[4/3] object-cover rounded-xl border-4 border-candy-black mb-4" />
+          <p class="font-black text-white text-xl leading-tight">Hands full of batter? Just say the word. 🧁✨</p>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="bg-white border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal rotate-1 hover:rotate-0 transition-transform sm:mt-8">
+          <img src="images/lifestyle_office.jpg" class="w-full aspect-[4/3] object-cover rounded-xl border-4 border-candy-black mb-4" />
+          <p class="font-black text-xl leading-tight">Deep focus activated. Distractions? Gone. 📚🎯</p>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="bg-candy-green border-6 border-candy-black rounded-[2rem] p-4 shadow-brutal -rotate-1 hover:rotate-0 transition-transform lg:mt-16">
+          <img src="images/lifestyle_party.jpg" class="w-full aspect-[4/3] object-cover rounded-xl border-4 border-candy-black mb-4" />
+          <p class="font-black text-xl leading-tight">One tap. Full vibe. Your home is the venue. 🪩🎉</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BOTTOM CTA
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="py-32 px-6 text-center">
+    <h2 class="font-candy text-6xl md:text-8xl text-white text-stroke drop-shadow-xl mb-12">
+      CONNECT IT.<br>
+      <span class="text-candy-pink text-stroke">CONTROL</span> IT.<br>
+      <span class="text-candy-blue text-stroke">ENJOY</span> IT.
+    </h2>
+    <a href="shop.html" class="btn-brutal inline-block bg-candy-yellow text-candy-black font-black text-3xl px-12 py-6 border-6 border-candy-black rounded-full shadow-brutal tracking-wide">
+      START BUILDING NOW! 🚀
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER (Chunky, Playful)
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="bg-candy-blue border-t-8 border-candy-black pt-20 pb-10 px-6">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Newsletter block -->
+      <div class="bg-white border-6 border-candy-black rounded-[3rem] p-10 md:p-16 shadow-brutal mb-20 text-center relative max-w-4xl mx-auto transform -rotate-1">
+        <div class="absolute -top-10 left-10 w-20 h-20 bg-candy-yellow border-4 border-candy-black rounded-full flex items-center justify-center text-4xl shadow-brutal animate-bounce-slow">💌</div>
+        
+        <h3 class="font-candy text-5xl md:text-6xl text-white text-stroke mb-4">JOIN THE GRID!</h3>
+        <p class="font-black text-xl md:text-2xl mb-8">Software updates, new drops, and automation inspo straight to your inbox. No spam, just tech updates.</p>
+        
+        <form class="flex flex-col sm:flex-row gap-4 justify-center" onsubmit="event.preventDefault(); alert('You got it, sugar! Welcome to Lumora! 🍭');">
+          <input type="email" placeholder="ENTER YOUR EMAIL..." required class="w-full sm:w-2/3 bg-candy-bg border-4 border-candy-black rounded-full px-6 py-4 text-xl font-black focus:outline-none focus:ring-4 focus:ring-candy-pink shadow-brutal-sm placeholder:text-gray-400" />
+          <button type="submit" class="btn-brutal bg-candy-pink text-white font-black text-xl px-10 py-4 border-4 border-candy-black rounded-full shadow-brutal-sm">
+            SUBSCRIBE!
+          </button>
+        </form>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 font-black text-lg mb-16">
+        
+        <div class="col-span-1 md:col-span-2">
+          <h4 class="font-candy text-5xl text-white text-stroke mb-4">LUMORA!</h4>
+          <p class="text-xl mb-6">Making homes smarter, one intelligent device at a time. The future is connected.</p>
+          <div class="bg-white border-4 border-candy-black shadow-brutal-sm p-4 rounded-xl transform -rotate-1 inline-block">
+            <h5 class="text-2xl bg-candy-pink text-white inline-block px-3 py-1 mb-2 transform -skew-x-6">DEVELOPED BY</h5>
+            <ul class="text-lg space-y-1">
+              <li><strong>Name:</strong> Jatin Watwani</li>
+              <li><strong>Roll No:</strong> 27069</li>
+              <li><strong>Branch:</strong> SY BTech AIML</li>
+              <li><strong>College:</strong> Modern College of Engineering, Pune</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">SHOP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Smart Lights</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Cameras & Locks</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Climate Control</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors hover:underline decoration-4">Hubs & Audio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-2xl bg-candy-black text-white inline-block px-4 py-1 mb-6 transform -skew-x-6">HELP STUFF</h4>
+          <ul class="space-y-4 text-xl">
+            <li><a href="#" onclick="showPopup(event, 'Help Center')" class="hover:text-white transition-colors hover:underline decoration-4">Help Center</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Setup Guides')" class="hover:text-white transition-colors hover:underline decoration-4">Setup Guides</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Contact Us')" class="hover:text-white transition-colors hover:underline decoration-4">Contact Us</a></li>
+            <li><a href="#" onclick="showPopup(event, 'Returns & Warranty')" class="hover:text-white transition-colors hover:underline decoration-4">Returns & Warranty</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t-4 border-candy-black pt-8 flex flex-col md:flex-row justify-between items-center gap-6 font-black text-sm uppercase">
+        <p>© 2026 LUMORA INC. POWERED BY TECH.</p>
+        <div class="flex gap-6">
+          <a href="#" onclick="showPopup(event, 'Privacy Policy')" class="hover:text-white">PRIVACY</a>
+          <a href="#" onclick="showPopup(event, 'Terms of Service')" class="hover:text-white">TERMS</a>
+          <a href="#" onclick="showPopup(event, 'Cookies')" class="hover:text-white">COOKIES</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- INFO POPUP MODAL -->
+  <div id="info-popup" class="hidden fixed inset-0 z-[100] items-center justify-center bg-candy-black/80 backdrop-blur-sm p-4">
+    <div class="bg-white border-8 border-candy-black shadow-brutal p-8 md:p-12 rounded-[2rem] max-w-2xl w-full relative transform -rotate-1">
+      <button onclick="closePopup()" class="absolute -top-4 -right-4 w-12 h-12 bg-candy-pink text-white border-4 border-candy-black rounded-full shadow-brutal-sm flex items-center justify-center font-black text-2xl hover:bg-candy-yellow hover:text-candy-black transition-colors z-10">X</button>
+      <h2 id="popup-title" class="font-candy text-3xl md:text-5xl text-candy-blue text-stroke drop-shadow-md mb-6 uppercase">Title</h2>
+      <p id="popup-body" class="font-bold text-lg md:text-xl leading-relaxed text-candy-black whitespace-pre-wrap">Body content goes here.</p>
+    </div>
+  </div>
+
+  <script>
+    const popupContent = {
+      'Help Center': 'Welcome to the Lumora Help Center. Our dedicated support team is committed to ensuring you have a seamless experience with our smart lighting products.\n\nIf you encounter any connectivity or hardware issues, please consult our troubleshooting guides or reach out to our technical support staff for prompt, professional assistance.',
+      'Setup Guides': 'Our smart devices are designed for intuitive installation.\n\n1. Download the Lumora mobile application.\n2. Connect the device to a standard power outlet.\n3. Follow the on-screen instructions to pair the device with your local Wi-Fi network.\n\nFor detailed configuration options and advanced integrations, please refer to the comprehensive user manual provided in the packaging.',
+      'Contact Us': 'We value your feedback and inquiries. You can reach our customer service representatives via email at support@lumora.com or by calling our toll-free number.\n\nOur official business hours are Monday through Friday, 9:00 AM to 5:00 PM EST. We strive to respond to all communications within one business day.',
+      'Returns & Warranty': 'Lumora offers a comprehensive 1-year limited warranty on all hardware components, covering manufacturing defects and malfunctions under normal use conditions.\n\nIf you are not completely satisfied with your purchase, products may be returned in their original packaging within 30 days of receipt for a full refund.',
+      'Privacy Policy': 'Lumora respects your privacy and is committed to protecting your personal data. We only collect essential information required to operate and improve your smart home experience.\n\nWe do not sell, distribute, or lease your personal information to third parties unless we have your explicit permission or are required by law to do so.',
+      'Terms of Service': 'By accessing and using Lumora products and services, you agree to comply with our terms and conditions.\n\nThese terms govern the usage of our proprietary software and hardware. Any unauthorized modification or reverse engineering of Lumora devices is strictly prohibited and will void all applicable warranties.',
+      'Cookies': 'Our website utilizes cookies and similar tracking technologies to enhance user experience, analyze site traffic, and optimize performance.\n\nBy continuing to navigate our website, you consent to our use of cookies in accordance with our standard data policy. You may manage your cookie preferences through your browser settings.'
+    };
+
+    function showPopup(event, key) {
+      event.preventDefault();
+      document.getElementById('popup-title').innerText = key;
+      document.getElementById('popup-body').innerText = popupContent[key];
+      const popup = document.getElementById('info-popup');
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+    }
+
+    function closePopup() {
+      const popup = document.getElementById('info-popup');
+      popup.classList.add('hidden');
+      popup.classList.remove('flex');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMORA! | Support & Policies</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800;900&family=Titan+One&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { candy: ['"Titan One"', 'cursive'], sans: ['Fredoka', 'sans-serif'], },
+          colors: { candy: { pink: '#FF4DB8', blue: '#00D4FF', yellow: '#FFDF00', green: '#00FF66', purple: '#B533FF', bg: '#FFF5F8', black: '#1A1A1A', }, },
+          boxShadow: { 'brutal': '8px 8px 0px 0px rgba(26,26,26,1)', 'brutal-sm': '4px 4px 0px 0px rgba(26,26,26,1)', },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { background-color: #FFF5F8; color: #1A1A1A; background-image: radial-gradient(#FF4DB8 1px, transparent 1px); background-size: 40px 40px; }
+    .text-stroke { -webkit-text-stroke: 2px #1A1A1A; color: #FFF; }
+    .btn-brutal { transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .btn-brutal:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px 0px rgba(26,26,26,1); }
+    .btn-brutal:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px 0px rgba(26,26,26,1); }
+  </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-candy-yellow selection:text-candy-black pt-10 pb-20">
+
+  <!-- TOP NAV -->
+  <div class="max-w-4xl mx-auto px-6 mb-12">
+    <a href="index.html" class="btn-brutal bg-white text-candy-black font-black text-xl px-6 py-3 border-4 border-candy-black rounded-full shadow-brutal-sm inline-flex items-center gap-2">
+      <span>⬅️</span> BACK TO HOME
+    </a>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-6 space-y-16">
+
+    <div class="text-center mb-16 transform -rotate-1">
+      <h1 class="font-candy text-5xl md:text-7xl text-candy-pink text-stroke drop-shadow-md mb-4 uppercase">Support & Policies</h1>
+      <p class="font-black text-xl md:text-2xl bg-candy-yellow inline-block px-4 py-2 border-4 border-candy-black transform skew-x-6 uppercase">Comprehensive guidelines and assistance for Lumora users</p>
+    </div>
+
+    <!-- Help Center -->
+    <section id="help-center" class="bg-white border-6 border-candy-black p-8 md:p-12 rounded-[2rem] shadow-brutal">
+      <h2 class="text-4xl font-black mb-6 bg-candy-blue text-white inline-block px-4 py-1 border-4 border-candy-black transform -skew-x-3">Help Center</h2>
+      <p class="text-xl font-bold leading-relaxed mb-4">
+        Welcome to the Lumora Help Center. Our dedicated support team is committed to ensuring you have a seamless experience with our smart lighting products. 
+      </p>
+      <p class="text-xl font-bold leading-relaxed">
+        If you encounter any connectivity or hardware issues, please consult our troubleshooting guides or reach out to our technical support staff for prompt, professional assistance.
+      </p>
+    </section>
+
+    <!-- Setup Guides -->
+    <section id="setup-guides" class="bg-white border-6 border-candy-black p-8 md:p-12 rounded-[2rem] shadow-brutal transform rotate-1">
+      <h2 class="text-4xl font-black mb-6 bg-candy-green text-candy-black inline-block px-4 py-1 border-4 border-candy-black transform skew-x-3">Setup Guides</h2>
+      <ol class="text-xl font-bold leading-relaxed space-y-4 list-decimal list-inside">
+        <li>Download the Lumora mobile application.</li>
+        <li>Connect the device to a standard power outlet.</li>
+        <li>Follow the on-screen instructions to pair the device with your local Wi-Fi network.</li>
+      </ol>
+      <p class="text-xl font-bold leading-relaxed mt-6">
+        Our smart devices are designed for intuitive installation. For detailed configuration options and advanced integrations, please refer to the comprehensive user manual provided in the packaging.
+      </p>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contact-us" class="bg-white border-6 border-candy-black p-8 md:p-12 rounded-[2rem] shadow-brutal transform -rotate-1">
+      <h2 class="text-4xl font-black mb-6 bg-candy-yellow text-candy-black inline-block px-4 py-1 border-4 border-candy-black transform -skew-x-3">Contact Us</h2>
+      <p class="text-xl font-bold leading-relaxed mb-4">
+        We value your feedback and inquiries. You can reach our customer service representatives via email at <strong>support@lumora.com</strong> or by calling our toll-free number.
+      </p>
+      <p class="text-xl font-bold leading-relaxed">
+        Our official business hours are Monday through Friday, 9:00 AM to 5:00 PM EST. We strive to respond to all communications within one business day.
+      </p>
+    </section>
+
+    <!-- Returns & Warranty -->
+    <section id="returns" class="bg-white border-6 border-candy-black p-8 md:p-12 rounded-[2rem] shadow-brutal">
+      <h2 class="text-4xl font-black mb-6 bg-candy-pink text-white inline-block px-4 py-1 border-4 border-candy-black transform skew-x-3">Returns & Warranty</h2>
+      <p class="text-xl font-bold leading-relaxed">
+        Lumora offers a comprehensive 1-year limited warranty on all hardware components, covering manufacturing defects and malfunctions under normal use conditions. If you are not completely satisfied with your purchase, products may be returned in their original packaging within 30 days of receipt for a full refund.
+      </p>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacy" class="bg-candy-black text-white border-6 border-candy-black p-8 md:p-12 rounded-[2rem] shadow-brutal transform rotate-1">
+      <h2 class="text-4xl font-black mb-6 text-candy-pink">Privacy Policy</h2>
+      <p class="text-xl font-bold leading-relaxed mb-4">
+        Lumora respects your privacy and is committed to protecting your personal data. We only collect essential information required to operate and improve your smart home experience.
+      </p>
+      <p class="text-xl font-bold leading-relaxed">
+        We do not sell, distribute, or lease your personal information to third parties unless we have your explicit permission or are required by law to do so. Our data handling procedures comply with industry-standard security protocols.
+      </p>
+    </section>
+
+    <!-- Terms -->
+    <section id="terms" class="bg-candy-black text-white border-6 border-candy-black p-8 md:p-12 rounded-[2rem] shadow-brutal transform -rotate-1">
+      <h2 class="text-4xl font-black mb-6 text-candy-blue">Terms of Service</h2>
+      <p class="text-xl font-bold leading-relaxed">
+        By accessing and using Lumora products and services, you agree to comply with our terms and conditions. These terms govern the usage of our proprietary software and hardware. Any unauthorized modification or reverse engineering of Lumora devices is strictly prohibited and will void all applicable warranties.
+      </p>
+    </section>
+
+    <!-- Cookies -->
+    <section id="cookies" class="bg-candy-black text-white border-6 border-candy-black p-8 md:p-12 rounded-[2rem] shadow-brutal">
+      <h2 class="text-4xl font-black mb-6 text-candy-yellow">Cookies</h2>
+      <p class="text-xl font-bold leading-relaxed">
+        Our website utilizes cookies and similar tracking technologies to enhance user experience, analyze site traffic, and optimize performance. By continuing to navigate our website, you consent to our use of cookies in accordance with our standard data policy. You may manage your cookie preferences through your browser settings.
+      </p>
+    </section>
+
+  </div>
+
+</body>
+</html>
