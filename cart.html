@@ -143,6 +143,11 @@
               <span>Taxes (8%)</span>
               <span id="tax-display">₹520</span>
             </div>
+            <!-- Discount Row -->
+            <div id="discount-row" class="hidden flex justify-between text-candy-pink bg-candy-pink/15 px-3 py-1.5 rounded-xl border-2 border-candy-black">
+              <span>Coupon (SHERR 🔥)</span>
+              <span id="discount-display">-₹0</span>
+            </div>
           </div>
 
           <div class="flex justify-between items-end mb-8">
@@ -151,9 +156,12 @@
           </div>
 
           <!-- Promo Code -->
-          <div class="flex mb-8">
-            <input type="text" placeholder="PROMO CODE" class="w-full border-4 border-r-0 border-candy-black rounded-l-2xl px-4 py-3 font-black focus:outline-none uppercase" />
-            <button class="bg-candy-black text-white border-4 border-candy-black rounded-r-2xl px-4 font-black hover:bg-gray-800 transition-colors">APPLY</button>
+          <div class="mb-8">
+            <div class="flex">
+              <input type="text" id="coupon-input" placeholder="PROMO CODE" class="w-full border-4 border-r-0 border-candy-black rounded-l-2xl px-4 py-3 font-black focus:outline-none uppercase bg-white text-candy-black" />
+              <button id="apply-coupon-btn" type="button" class="bg-candy-black text-white border-4 border-candy-black rounded-r-2xl px-5 font-black hover:bg-gray-800 transition-colors uppercase">APPLY</button>
+            </div>
+            <div id="coupon-feedback" class="hidden mt-2 text-sm font-black px-3 py-1.5 rounded-xl border-2 border-candy-black"></div>
           </div>
 
           <!-- Razorpay Checkout button -->
@@ -282,6 +290,10 @@
           <div class="flex justify-between text-gray-600">
             <span>Taxes Included (8%)</span>
             <span id="receipt-tax">₹520</span>
+          </div>
+          <div id="receipt-discount-row" class="hidden flex justify-between text-candy-pink font-black">
+            <span>Special Coupon (SHERR 🔥)</span>
+            <span id="receipt-discount">-₹0</span>
           </div>
           <div class="flex justify-between items-center text-3xl pt-4 border-t-4 border-candy-black">
             <span>AMOUNT CHARGED</span>
@@ -462,6 +474,13 @@
         { id: 1, name: 'Lumora Glow Bulb', price: 2499, qty: 1, img: 'images/product_bulb_1.png', element: document.querySelectorAll('.cart-item')[0] },
         { id: 2, name: 'Brain Box Mini', price: 3999, qty: 1, img: 'images/product_hub_mini.png', element: document.querySelectorAll('.cart-item')[1] }
       ];
+      let appliedCoupon = null;
+
+      const couponInput = document.getElementById('coupon-input');
+      const applyCouponBtn = document.getElementById('apply-coupon-btn');
+      const couponFeedback = document.getElementById('coupon-feedback');
+      const discountRow = document.getElementById('discount-row');
+      const discountDisplay = document.getElementById('discount-display');
 
       function renderCart() {
         let subtotal = 0;
@@ -479,12 +498,21 @@
         });
 
         const tax = Math.round(subtotal * 0.08);
-        const total = subtotal + tax;
+        const standardTotal = subtotal + tax;
 
         subtotalDisplay.innerText = '₹' + subtotal.toLocaleString('en-IN');
         taxDisplay.innerText = '₹' + tax.toLocaleString('en-IN');
-        totalDisplay.innerText = '₹' + total.toLocaleString('en-IN');
         navCartCount.innerText = totalItems;
+
+        if (appliedCoupon === 'SHERR' && cart.length > 0) {
+          const discount = Math.max(0, standardTotal - 3);
+          discountRow.classList.remove('hidden');
+          discountDisplay.innerText = '-₹' + discount.toLocaleString('en-IN');
+          totalDisplay.innerText = '₹3';
+        } else {
+          discountRow.classList.add('hidden');
+          totalDisplay.innerText = '₹' + standardTotal.toLocaleString('en-IN');
+        }
 
         const rzpBtn = document.getElementById('razorpay-btn');
         if(cart.length === 0) {
@@ -496,6 +524,53 @@
           rzpBtn.disabled = false;
           rzpBtn.style.opacity = '1';
         }
+      }
+
+      function applyCouponCode(manualCode) {
+        const rawCode = manualCode || (couponInput ? couponInput.value : '');
+        const code = (rawCode || '').trim().toUpperCase();
+
+        if (!code) {
+          showToast('PLEASE ENTER A COUPON CODE! 🏷️');
+          return;
+        }
+
+        if (code === 'SHERR') {
+          appliedCoupon = 'SHERR';
+          couponInput.value = 'SHERR';
+          couponFeedback.className = 'mt-2 text-sm font-black px-3 py-1.5 rounded-xl border-2 border-candy-black bg-candy-green text-candy-black flex items-center justify-between shadow-sm';
+          couponFeedback.innerHTML = `<span>🎉 CODE 'SHERR' ACTIVE: TOTAL SET TO ₹3!</span> <button type="button" id="remove-coupon-btn" class="ml-2 underline font-black text-xs hover:text-red-700">REMOVE</button>`;
+          couponFeedback.classList.remove('hidden');
+          document.getElementById('remove-coupon-btn').onclick = removeCouponCode;
+          renderCart();
+          playSuccessFanfare();
+          showToast('🔥 COUPON SHERR APPLIED! TOTAL IS NOW ₹3!');
+        } else {
+          couponFeedback.className = 'mt-2 text-sm font-black px-3 py-1.5 rounded-xl border-2 border-candy-black bg-candy-pink text-white shadow-sm';
+          couponFeedback.innerHTML = `<span>❌ INVALID CODE '${code}'. TRY 'SHERR'!</span>`;
+          couponFeedback.classList.remove('hidden');
+          showToast('❌ INVALID CODE! TRY "SHERR"');
+        }
+      }
+
+      function removeCouponCode() {
+        appliedCoupon = null;
+        if (couponInput) couponInput.value = '';
+        if (couponFeedback) couponFeedback.classList.add('hidden');
+        renderCart();
+        showToast('COUPON REMOVED 🛒');
+      }
+
+      if (applyCouponBtn) {
+        applyCouponBtn.addEventListener('click', () => applyCouponCode());
+      }
+      if (couponInput) {
+        couponInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            applyCouponCode();
+          }
+        });
       }
 
       // Attach events to existing items
@@ -726,10 +801,22 @@
         });
 
         const tax = Math.round(subtotal * 0.08);
-        const grandTotal = subtotal + tax;
+        const standardTotal = subtotal + tax;
+        const receiptDiscountRow = document.getElementById('receipt-discount-row');
+        const receiptDiscount = document.getElementById('receipt-discount');
+        const receiptTotal = document.getElementById('receipt-total');
 
         document.getElementById('receipt-tax').innerText = '₹' + tax.toLocaleString('en-IN');
-        document.getElementById('receipt-total').innerText = '₹' + grandTotal.toLocaleString('en-IN');
+
+        if (appliedCoupon === 'SHERR') {
+          const discount = Math.max(0, standardTotal - 3);
+          receiptDiscountRow.classList.remove('hidden');
+          receiptDiscount.innerText = '-₹' + discount.toLocaleString('en-IN');
+          receiptTotal.innerText = '₹3';
+        } else {
+          receiptDiscountRow.classList.add('hidden');
+          receiptTotal.innerText = '₹' + standardTotal.toLocaleString('en-IN');
+        }
 
         // Swap views
         document.getElementById('cart-header').classList.add('hidden');
@@ -774,7 +861,8 @@
         cart.forEach(item => { subtotal += item.price * item.qty; });
         if (subtotal <= 0) return;
 
-        const totalAmount = Math.round((subtotal + (subtotal * 0.08)) * 100); // In Paise
+        // If coupon SHERR is applied, charge exactly ₹3 (300 paise)
+        const totalAmount = appliedCoupon === 'SHERR' ? 300 : Math.round((subtotal + (subtotal * 0.08)) * 100);
         let isPaymentSuccessful = false;
 
         const options = {
@@ -782,7 +870,9 @@
           amount: totalAmount,
           currency: 'INR',
           name: 'LUMORA! SMART HOME',
-          description: 'Smart Hardware & Ambience Kit',
+          description: appliedCoupon === 'SHERR'
+            ? 'VIP Special Order (Code: SHERR Applied - ₹3)'
+            : 'Smart Hardware & Ambience Kit',
           image: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
           handler: function (response) {
             isPaymentSuccessful = true;
@@ -837,6 +927,13 @@
         e.preventDefault();
         openRazorpay();
       };
+
+      // Auto-apply coupon from URL if present (e.g. ?coupon=SHERR)
+      const urlParams = new URLSearchParams(window.location.search);
+      const couponParam = urlParams.get('coupon');
+      if (couponParam) {
+        applyCouponCode(couponParam);
+      }
 
       // Auto-trigger checkout if redirected with ?checkout=1 (e.g. from Buy It Now on product page)
       if (window.location.search.includes('checkout') || window.location.hash.includes('checkout')) {
