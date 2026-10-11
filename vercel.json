@@ -1,3 +1,93 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/pages/shop",
+      "destination": "/shop.html"
+    },
+    {
+      "source": "/shop",
+      "destination": "/shop.html"
+    },
+    {
+      "source": "/pages/weddings",
+      "destination": "/weddings.html"
+    },
+    {
+      "source": "/weddings",
+      "destination": "/weddings.html"
+    },
+    {
+      "source": "/pages/content-hub",
+      "destination": "/content-hub.html"
+    },
+    {
+      "source": "/content-hub",
+      "destination": "/content-hub.html"
+    },
+    {
+      "source": "/pages/about-us",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/pages/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/pages/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/collections/party-pack",
+      "destination": "/collection-party-pack.html"
+    },
+    {
+      "source": "/collection-party-pack",
+      "destination": "/collection-party-pack.html"
+    },
+    {
+      "source": "/collections/colorfest",
+      "destination": "/collection-colorfest.html"
+    },
+    {
+      "source": "/collection-colorfest",
+      "destination": "/collection-colorfest.html"
+    },
+    {
+      "source": "/collections/:match*",
+      "destination": "/shop.html"
+    },
+    {
+      "source": "/products/:match*",
+      "destination": "/product.html"
+    },
+    {
+      "source": "/product",
+      "destination": "/product.html"
+    },
+    {
+      "source": "/pages/faq",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/pages/terms-of-use",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/pages/privacy-policy",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/pages/marketing-policy",
+      "destination": "/about.html"
+    }
+  ]
 }
